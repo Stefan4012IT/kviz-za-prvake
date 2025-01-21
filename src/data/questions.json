@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "type": "multiple-choice",
+        "question": "Koliko imaš godina?",
+        "options": ["5", "6", "7", "8"],
+        "correct": ["6", "7"]
+    },
+    {
+        "id": 2,
+        "type": "multiple-choice",
+        "question": "Koja životinja daje mleko?",
+        "options": ["Konj", "Krava", "Mačka"],
+        "correct": ["Krava"]
+    },
+    {
+        "id": 3,
+        "type": "drag-and-drop",
+        "question": "Spoji predmete koje koriste ljudi na slici u svom poslu:",
+        "targets": [
+            { "label": "Poštar", "correct": "pismo" },
+            { "label": "Medicinska sestra", "correct": "injekcija" },
+            { "label": "Pekar", "correct": "oklagija" }
+        ],
+        "items": [
+            { "label": "📜 Pismo", "value": "pismo" },
+            { "label": "💉 Injekcija", "value": "injekcija" },
+            { "label": "🍞 Oklagija", "value": "oklagija" }
+        ]
+    }
+]
