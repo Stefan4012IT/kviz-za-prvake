@@ -1,0 +1,35 @@
+.question-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.option {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.submit-btn,
+.next-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover,
+.next-btn:hover {
+    background-color: #0056b3;
+}

@@ -178,3 +178,109 @@ code {
   border-radius: 5px;
   cursor: grab;
 }
+
+/* Stilizacija za Question 6 */
+/* Kuća sa bazom i pozicijama za vrata i prozore */
+.base-details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  position: relative;
+  height: 100px;
+}
+
+.drag-target {
+  background: #e9ecef;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  min-height: 50px;
+  padding: 10px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.drag-target.over {
+  background: #d4edda;
+}
+
+/* Kada je baza postavljena */
+.base-set {
+  position: relative;
+  padding: 0;
+  height: 200px;
+  background-color: #e9ecef;
+  border: 1px solid #ccc;
+}
+
+/* Detalji unutar baze */
+.base-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 10px;
+}
+
+.base-details .drag-target {
+  flex: 1;
+  margin: 0 5px;
+  height: 50%;
+  text-align: center;
+}
+
+
+
+/* - ---- -- - -- -- -- ------- ----- - - - */
+.question-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sequence {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.sequence-item {
+  font-size: 2rem;
+}
+
+.options {
+  margin-top: 20px;
+}
+
+.option-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.option-btn.correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.option-btn.incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.next-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
