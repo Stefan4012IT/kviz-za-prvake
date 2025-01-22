@@ -80,6 +80,29 @@ code {
   color: #555;
 }
 
+/* Results - stranica */
+
+.results-page {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.results-page h1 {
+  font-size: 36px;
+  color: #007bff;
+}
+
+.results-page h2 {
+  font-size: 28px;
+  color: #28a745;
+}
+
+.results-page p {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #333;
+}
+
 
 /* Stilizacija za pitanje */
 .question-container {
@@ -155,4 +178,3 @@ code {
   border-radius: 5px;
   cursor: grab;
 }
-
