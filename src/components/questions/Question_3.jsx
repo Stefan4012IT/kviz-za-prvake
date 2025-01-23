@@ -25,6 +25,7 @@ function Question3({ onNext }) {
     return (
         <div className="question-container">
             <h2>Koju odeću oblačimo kada je leto?</h2>
+            <p>Za tačan odgovor potrebno je da odaberete više pojmova</p>
             <div className="options">
                 {["Jakna", "Kaput", "Majica", "Haljina"].map((option) => (
                     <button

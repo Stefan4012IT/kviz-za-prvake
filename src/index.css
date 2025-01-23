@@ -3,6 +3,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+    font-family: "Comfortaa", serif;
+    font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -13,72 +15,10 @@ code {
 }
 
 
-/* Stilizacija za GreetingPage */
-.greeting-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-}
 
-.greeting-panel {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 300px;
-}
-
-.greeting-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.greeting-input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.greeting-button {
-  padding: 10px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.greeting-button:hover {
-  background-color: #0056b3;
-}
 
 /* Stilizacija za Quiz stranicu */
-.quiz-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #e8f5e9;
-  text-align: center;
-}
 
-.quiz-container h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.quiz-container p {
-  font-size: 1.2rem;
-  color: #555;
-}
 
 /* Results - stranica */
 
@@ -100,7 +40,7 @@ code {
 .results-page p {
   font-size: 18px;
   margin-top: 10px;
-  color: #333;
+  color: #484848;
 }
 
 
@@ -110,35 +50,47 @@ code {
   margin-top: 20px;
 }
 
+.question-container h2{
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 400;
+  color: #484848;
+}
+
 .options {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   margin: 20px 0;
 }
 
 .option-btn {
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 20px 35px;
+  background-color: #f6b52e;
+  border: 1px solid #484848;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 28px;
 }
 
 .option-btn.selected {
-  background-color: #007bff;
+  background-color: #3564ab;
   color: #fff;
+  font-weight: 900;
 }
 
 .submit-btn {
   padding: 10px 20px;
   background-color: #28a745;
   color: #fff;
+  text-transform: uppercase;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 20px;
   cursor: pointer;
+  margin-top: 60px;
+  width: fit-content;
+  margin: auto;
 }
 
 .submit-btn:disabled {
@@ -249,17 +201,6 @@ code {
 
 .options {
   margin-top: 20px;
-}
-
-.option-btn {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: all 0.3s;
 }
 
 .option-btn.correct {

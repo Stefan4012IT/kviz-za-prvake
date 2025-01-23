@@ -1,0 +1,20 @@
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fefefe;
+    text-align: center;
+  }
+  
+  .quiz-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #484848;
+  }
+  
+  .quiz-container p {
+    font-size: 1.2rem;
+    color: #484848;
+  }

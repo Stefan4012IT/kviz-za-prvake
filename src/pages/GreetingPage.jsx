@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/greetingPage.css';
 
 function GreetingPage({ onSubmit }) {
     const [name, setName] = useState("");

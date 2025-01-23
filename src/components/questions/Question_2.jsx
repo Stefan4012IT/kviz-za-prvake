@@ -1,10 +1,20 @@
 import React, { useState } from "react";
+import '../../styles/question-2.css';
 import { useScore } from "../../context/ScoreContext";
 
 function Question2({ onNext }) {
-    const { addScore } = useScore(); // Pristup funkciji za dodavanje bodova
+    const { addScore } = useScore();
     const [selected, setSelected] = useState(null);
+
+    // Tačan odgovor
     const correctAnswer = "Krava";
+
+    // Opcije sa slikama
+    const options = [
+        { value: "Konj", imgSrc: process.env.PUBLIC_URL + "/img/question_2/konj.png" },
+        { value: "Krava", imgSrc: process.env.PUBLIC_URL + "/img/question_2/krava.png" },
+        { value: "Mačka", imgSrc: process.env.PUBLIC_URL + "/img/question_2/macka.png" },
+    ];
 
     const handleSubmit = () => {
         if (selected === correctAnswer) {
@@ -17,23 +27,23 @@ function Question2({ onNext }) {
         <div className="question-container">
             <h2>Koja životinja daje mleko?</h2>
             <div className="options">
-                {["Konj", "Krava", "Mačka"].map((option) => (
-                    <button
-                        key={option}
-                        className={`option-btn ${selected === option ? "selected" : ""}`}
-                        onClick={() => setSelected(option)}
+                {options.map((option) => (
+                    <div
+                        key={option.value}
+                        className={`option-btn opt-btn-img ${selected === option.value ? "selected" : ""}`}
+                        onClick={() => setSelected(option.value)}
                     >
-                        {option}
-                    </button>
+                        <img src={option.imgSrc} alt={option.value} className="option-image" />
+                    </div>
                 ))}
             </div>
-            <button
+            <div
                 className="submit-btn"
                 onClick={handleSubmit}
                 disabled={!selected} // Onemogućavamo dugme dok korisnik ne odabere opciju
             >
                 Dalje
-            </button>
+            </div>
         </div>
     );
 }

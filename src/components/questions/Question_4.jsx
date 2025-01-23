@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragAndDropContext, DraggableItem, DroppableTarget } from "../DragAndDrop";
 import "../../styles/drag-and-drop.css";
+import "../../styles/question-4.css";
 import { useScore } from "../../context/ScoreContext";
 
 function Question4({ onNext }) {
@@ -78,9 +79,13 @@ function Question4({ onNext }) {
             <h2>Spoji predmete koje koriste ljudi na slici u svom poslu:</h2>
             <DragAndDropContext onDragEnd={handleDragEnd}>
                 <div className="drag-container">
-                    <div className="drag-items">
+                    <div className="drag-items takeFrom">
                         {items.map((item) => (
-                            <DraggableItem key={item.id} id={item.id} label={item.label} />
+                            <DraggableItem key={item.id} id={item.id} label={item.label} >
+                                <div className="takeFrom">
+
+                                </div>
+                            </DraggableItem>
                         ))}
                     </div>
                     <div className="drag-targets">
@@ -91,10 +96,13 @@ function Question4({ onNext }) {
                                 label={target.label}
                             >
                                 {target.droppedItem && (
+                                    
                                     <DraggableItem
                                         id={target.droppedItem.id}
                                         label={target.droppedItem.label}
-                                    />
+                                    >
+                                        <div className="takeTo"></div>
+                                    </DraggableItem>
                                 )}
                             </DroppableTarget>
                         ))}

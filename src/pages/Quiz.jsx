@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/quiz.css';
 import Question1 from "../components/questions/Question_1";
 import Question2 from "../components/questions/Question_2";
 import Question3 from "../components/questions/Question_3";
@@ -19,6 +20,7 @@ import Question17 from "../components/questions/Question_17";
 import Question18 from "../components/questions/Question_18"; 
 import Question19 from "../components/questions/Question_19"; 
 
+
 import ResultsPage from "./ResultsPage";
 import { useScore } from "../context/ScoreContext";
 
@@ -30,6 +32,7 @@ function Quiz({ userData }) {
         // { id: 1, component: Question1 },
         // { id: 2, component: Question2 },
         // { id: 3, component: Question3 },
+        { id: 3, component: Question4 },
         // { id: 4, component: Question4 },
         // { id: 5, component: Question5 },
         // { id: 5, component: Question6 },
@@ -45,7 +48,7 @@ function Quiz({ userData }) {
         // { id: 7, component: Question16 },
         // { id: 7, component: Question17 },
         // { id: 7, component: Question18 },
-        { id: 7, component: Question19 },
+        // { id: 7, component: Question19 },
         // Dodavaćemo ostala pitanja ovde
     ];
 

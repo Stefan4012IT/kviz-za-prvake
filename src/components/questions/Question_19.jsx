@@ -1,33 +1,21 @@
 import React, { useState } from "react";
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SortableContext, useSortable, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import "../../styles/question-19.css";
 import { useScore } from "../../context/ScoreContext";
 
-function DraggableItem({ id, label }) {
-    const { attributes, listeners, setNodeRef, transform, transition } = useDraggable({ id });
+function SortableItem({ id, label }) {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
     const style = {
-        transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+        transform: CSS.Transform.toString(transform),
         transition,
     };
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="draggable-item">
             {label}
-        </div>
-    );
-}
-
-function DroppableArea({ id, children }) {
-    const { setNodeRef, isOver } = useDroppable({ id });
-
-    const style = {
-        backgroundColor: isOver ? "#d4edda" : "#f8f9fa",
-    };
-
-    return (
-        <div ref={setNodeRef} className="droppable-area" style={style}>
-            {children}
         </div>
     );
 }
@@ -53,17 +41,16 @@ function Question19({ onNext }) {
         return labels[id];
     }
 
-    const handleDragEnd = ({ active, over }) => {
-        if (!over) return;
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
 
-        const draggedItemIndex = sequence.findIndex((item) => item.id === active.id);
-        const droppedOnIndex = sequence.findIndex((item) => item.id === over.id);
+        if (over && active.id !== over.id) {
+            const oldIndex = sequence.findIndex((item) => item.id === active.id);
+            const newIndex = sequence.findIndex((item) => item.id === over.id);
 
-        if (draggedItemIndex !== -1 && droppedOnIndex !== -1) {
-            const updatedSequence = [...sequence];
-            const [draggedItem] = updatedSequence.splice(draggedItemIndex, 1);
-            updatedSequence.splice(droppedOnIndex, 0, draggedItem);
-            setSequence(updatedSequence);
+            if (oldIndex !== -1 && newIndex !== -1) {
+                setSequence((prevSequence) => arrayMove(prevSequence, oldIndex, newIndex));
+            }
         }
     };
 
@@ -82,12 +69,14 @@ function Question19({ onNext }) {
     return (
         <div className="question-container">
             <h2>Poređaj životinje od najmanje do najveće:</h2>
-            <DndContext onDragEnd={handleDragEnd}>
-                <DroppableArea id="sequence">
-                    {sequence.map((item) => (
-                        <DraggableItem key={item.id} id={item.id} label={item.label} />
-                    ))}
-                </DroppableArea>
+            <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                <SortableContext items={sequence.map((item) => item.id)} strategy={rectSortingStrategy}>
+                    <div className="sortable-container">
+                        {sequence.map((item) => (
+                            <SortableItem key={item.id} id={item.id} label={item.label} />
+                        ))}
+                    </div>
+                </SortableContext>
             </DndContext>
             {!isAnswered && (
                 <button

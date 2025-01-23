@@ -1,0 +1,53 @@
+/* Stilizacija za GreetingPage */
+.greeting-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FFF;
+  }
+  
+  .greeting-panel {
+    background: #fff;
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px 8px #efefef;
+    text-align: center;
+    width: 300px;
+  }
+  
+  .greeting-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .greeting-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #f6b52e;
+    border-radius: 5px;
+  }
+
+  .greeting-input:focus-visible {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #3564ab;
+    border-radius: 5px;
+  }
+  
+  .greeting-button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #28a745;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 60px;
+  }
+  
+  .greeting-button:hover {
+    background-color: #3564ab;
+  }
