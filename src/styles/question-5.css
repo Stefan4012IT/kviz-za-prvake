@@ -1,0 +1,81 @@
+.question-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sequence-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sequence-item {
+    font-size: 1.2rem;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    min-width: 100px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.droppable-target {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.drag-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.draggable-item {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: grab;
+    transition: transform 0.2s;
+}
+
+.draggable-item:active {
+    cursor: grabbing;
+}
+
+.dropped-item {
+    font-size: 1.2rem;
+    padding: 10px;
+    border: 1px solid #28a745;
+    background-color: #e7f3e7;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+}
