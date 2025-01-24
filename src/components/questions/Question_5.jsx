@@ -24,10 +24,15 @@ function DroppableTarget({ id, children, onDrop }) {
     const style = {
         backgroundColor: isOver ? "#d4edda" : "#f8f9fa",
         border: isOver ? "2px solid #28a745" : "2px dashed #ccc",
+        minHeight: "50px",
+        minWidth: "100px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     };
 
     return (
-        <div ref={setNodeRef} style={style} className="droppable-target">
+        <div ref={setNodeRef} style={style} onDrop={onDrop} className="droppable-target">
             {children}
         </div>
     );
@@ -47,57 +52,56 @@ function Question5({ onNext }) {
         { id: "velika-zvezda", label: "⭐ Velika zvezda" },
     ];
 
-    const [target, setTarget] = useState(null); // Čuva podatke o izabranoj zvezdi
+    const [droppedItem, setDroppedItem] = useState(null);
 
     const handleDragEnd = ({ active, over }) => {
-        if (!over) return;
-
-        const draggedItem = options.find((option) => option.id === active.id);
-
-        if (draggedItem && over.id === "droppable-target") {
-            setTarget(draggedItem); // Postavi izabrani element
+        if (over?.id === "droppable-target") {
+            const draggedItem = options.find((option) => option.id === active.id);
+            if (draggedItem) {
+                setDroppedItem(draggedItem);
+            }
         }
     };
 
     const handleSubmit = () => {
-        if (target?.id === "najveca-zvezda") {
-            addScore(1); // Dodaj bod za tačan odgovor
+        if (droppedItem?.id === "najveca-zvezda") {
+            addScore(1);
         }
-        onNext(); // Prelazak na sledeće pitanje
+        onNext();
     };
 
     return (
-        <div className="question-container">
-            <h2>Nastavi niz:</h2>
-            <div className="sequence-container">
-                {sequence.map((item) => (
-                    <div key={item.id} className="sequence-item">
-                        {item.label}
-                    </div>
-                ))}
-                <DroppableTarget id="droppable-target">
-                    {target && (
-                        <div className="dropped-item">
-                            {target.label}
+        <DndContext onDragEnd={handleDragEnd}>
+            <div className="question-container">
+                <h2>Nastavi niz:</h2>
+                <div className="sequence-container">
+                    {sequence.map((item) => (
+                        <div key={item.id} className="sequence-item">
+                            {item.label}
                         </div>
-                    )}
-                </DroppableTarget>
-            </div>
-            <DndContext onDragEnd={handleDragEnd}>
-                <div className="drag-container start-content">
+                    ))}
+                    <DroppableTarget id="droppable-target">
+                        {droppedItem ? (
+                            <div className="dropped-item">{droppedItem.label}</div>
+                        ) : (
+                            <span>?</span>
+                        )}
+                    </DroppableTarget>
+                </div>
+                <div className="drag-container">
                     {options.map((option) => (
                         <DraggableItem key={option.id} id={option.id} label={option.label} />
                     ))}
                 </div>
-            </DndContext>
-            <button
-                className="submit-btn"
-                onClick={handleSubmit}
-                disabled={!target} // Onemogućeno dok korisnik ne odabere opciju
-            >
-                Dalje
-            </button>
-        </div>
+                <button
+                    className="submit-btn"
+                    onClick={handleSubmit}
+                    disabled={!droppedItem}
+                >
+                    Dalje
+                </button>
+            </div>
+        </DndContext>
     );
 }
 
