@@ -1,17 +1,19 @@
 import React from "react";
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
-import "../styles/drag-and-drop.css";
 
 // DraggableItem: Element koji može da se prevlači
 export function DraggableItem({ id, label }) {
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
+
+    // Dinamička klasa bazirana na ID elementa
+    const dynamicClass = `drag-item-${id}`;
 
     return (
         <div
             ref={setNodeRef}
             {...listeners}
             {...attributes}
-            className={`drag-item ${isDragging ? "dragging" : ""}`}
+            className={`drag-item ${dynamicClass} ${isDragging ? "dragging" : ""}`}
             style={{
                 transform: transform
                     ? `translate(${transform.x}px, ${transform.y}px)`

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import '../styles/quiz.css';
 import Question1 from "../components/questions/Question_1";
 import Question2 from "../components/questions/Question_2";
 import Question3 from "../components/questions/Question_3";
@@ -34,8 +33,8 @@ function Quiz({ userData }) {
         // { id: 3, component: Question3 },
         // { id: 4, component: Question4 },
         // { id: 5, component: Question5 },
-        // { id: 6, component: Question6 },
-        { id: 7, component: Question7 },
+        { id: 6, component: Question6 },
+        // { id: 7, component: Question7 },
         // { id: 8, component: Question8 },
         // { id: 9, component: Question9 },
         // { id: 10, component: Question10 },

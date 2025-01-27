@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DragAndDropContext, DraggableItem, DroppableTarget } from "../DragAndDrop";
-import "../../styles/question-14.css";
 import { useScore } from "../../context/ScoreContext";
 
 function Question14({ onNext }) {

@@ -1,0 +1,122 @@
+.drag-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.drag-items {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.draggable-item {
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+.draggable-item:active {
+    cursor: grabbing;
+}
+
+.big-square {
+    width: 200px;
+    height: 200px;
+    background-color: #007bff;
+    border: 2px solid #0056b3;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.big-triangle {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid #28a745;
+}
+
+.small-square {
+    width: 50px;
+    height: 50px;
+    background-color: #ffc107;
+    border: 2px solid #e0a800;
+}
+
+.small-rectangle {
+    width: 50px;
+    height: 80px;
+    background-color: #fd7e14;
+    border: 2px solid #e8590c;
+}
+
+.droppable {
+    border: 2px dashed #ccc;
+    min-height: 50px;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+
+    &.base {
+        height: 200px;
+    }
+}
+
+.droppable-over {
+    border-color: #007bff;
+}
+
+.base.filled {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    background-color: #007bff;
+    height: 200px;
+    width: 200px;
+}
+
+.window {
+    width: 50px;
+    height: 50px;
+    background-color: #ffc107;
+    margin: 5px;
+
+    &.right-window {
+        grid-column: 3 / 4;
+    }
+
+    &.left-window {
+        grid-column: 1/2;
+    }
+}
+
+.door {
+    background-color: #fd7e14;
+    margin: 5px;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.roof {
+    width: 200px;
+    height: 100px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

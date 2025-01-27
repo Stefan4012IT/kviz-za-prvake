@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, useSortable, arrayMove, rectSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import "../../styles/question-19.css";
 import { useScore } from "../../context/ScoreContext";
 
 function SortableItem({ id, label }) {

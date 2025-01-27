@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useScore } from "../../context/ScoreContext";
-import '../../styles/question-7.css'
 
 function Question7({ onNext }) {
     const { addScore } = useScore();

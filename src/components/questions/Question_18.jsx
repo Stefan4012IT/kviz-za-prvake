@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../styles/question-18.css";
 import { useScore } from "../../context/ScoreContext";
 
 function Question18({ onNext }) {

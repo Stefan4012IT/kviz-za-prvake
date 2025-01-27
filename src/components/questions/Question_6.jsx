@@ -1,106 +1,143 @@
 import React, { useState } from "react";
-import { DragAndDropContext, DraggableItem, DroppableTarget } from "../DragAndDrop";
-import "../../styles/question-6.css";
+import { DndContext, useDroppable, useDraggable } from "@dnd-kit/core";
+import "../../styles/question-6.scss";
 import { useScore } from "../../context/ScoreContext";
+
+function DraggableItem({ id, className }) {
+    const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
+
+    return (
+        <div
+            ref={setNodeRef}
+            style={{
+                transform: transform
+                    ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+                    : undefined,
+                opacity: isDragging ? 0.5 : 1,
+            }}
+            className={`draggable-item ${className}`} // Dodavanje klase iz SCSS-a
+            {...attributes}
+            {...listeners}
+        ></div>
+    );
+}
+
+function DroppableTarget({ id, children, className }) {
+    const { setNodeRef, isOver } = useDroppable({ id });
+
+    return (
+        <div
+            ref={setNodeRef}
+            className={`${className} ${isOver ? "droppable-over" : ""}`} // Dodavanje klase za aktivno polje
+        >
+            {children}
+        </div>
+    );
+}
 
 function Question6({ onNext }) {
     const { addScore } = useScore();
-
-    const [items, setItems] = useState([
-        { id: "veliki-kvadrat", label: "🟦 Veliki kvadrat" },
-        { id: "veliki-trougao", label: "🔺 Veliki trougao" },
-        { id: "mali-kvadratic", label: "⬛ Mali kvadratić" },
-        { id: "mali-pravougaonik", label: "▭ Mali pravougaonik" },
-    ]);
-
-    const [base, setBase] = useState({
-        roof: { id: "roof", correct: ["veliki-trougao"], items: [] },
-        main: { id: "main", hasBigSquare: false, items: [] }, // Veliki kvadrat i sub-targets
-        isBaseEnabled: true, // Kontrolišemo da li je `base` još uvek droppable
+    const [targets, setTargets] = useState({
+        roof: [],
+        base: [],
+        leftWindow: [],
+        rightWindow: [],
+        door: [],
     });
 
     const handleDragEnd = ({ active, over }) => {
         if (!over) return;
 
-        const draggedItem = items.find((item) => item.id === active.id);
+        const sourceId = active.id;
+        const targetId = over.id;
 
-        if (!draggedItem) return;
+        setTargets((prev) => {
+            const updated = { ...prev };
 
-        const updatedItems = items.filter((item) => item.id !== active.id);
-        const updatedBase = { ...base };
+            // Uklanjanje iz svih ciljeva
+            for (const key in updated) {
+                updated[key] = updated[key].filter((item) => item !== sourceId);
+            }
 
-        // Ako je veliki kvadrat prebačen u bazu
-        if (over.id === "main" && draggedItem.id === "veliki-kvadrat") {
-            updatedBase.main.hasBigSquare = true;
-            updatedBase.isBaseEnabled = false; // Onemogućavamo drop na `base`
-        }
+            // Dodavanje u novi cilj
+            if (updated[targetId]) {
+                updated[targetId].push(sourceId);
+            }
 
-        // Ako se vrata ili prozori prebacuju u veliki kvadrat
-        if (over.id === "big-square" && ["mali-pravougaonik", "mali-kvadratic"].includes(draggedItem.id)) {
-            updatedBase.main.items.push(draggedItem);
-        }
-
-        setItems(updatedItems);
-        setBase(updatedBase);
+            console.log("Updated targets:", updated); // Log za proveru
+            return updated;
+        });
     };
 
-    const handleSubmit = () => {
-        let scoreToAdd = 0;
+    const calculateScore = () => {
+        let score = 0;
 
-        // Proveri tačnost krova
-        if (base.roof.items.length === 1 && base.roof.items[0].id === "veliki-trougao") {
-            scoreToAdd++;
-        }
+        if (targets.roof.includes("big-triangle")) score++;
+        if (targets.base.includes("big-square")) score++;
+        if (targets.leftWindow.includes("small-square")) score++;
+        if (targets.rightWindow.includes("small-square")) score++;
+        if (targets.door.includes("small-rectangle")) score++;
 
-        // Proveri tačnost sub-targetova u velikom kvadratu
-        base.main.items.forEach((item) => {
-            if (item.id === "mali-pravougaonik" || item.id === "mali-kvadratic") {
-                scoreToAdd++;
-            }
-        });
+        return score;
+    };
 
-        addScore(scoreToAdd);
+    const handleNext = () => {
+        const score = calculateScore();
+        addScore(score);
         onNext();
     };
 
     return (
         <div className="question-container">
-            <h2>Napravi kućicu od datih oblika:</h2>
-            <DragAndDropContext onDragEnd={handleDragEnd}>
+            <h2>Složi kućicu:</h2>
+            <DndContext onDragEnd={handleDragEnd}>
                 <div className="drag-container">
+                    {/* Elementi za prevlačenje */}
                     <div className="drag-items">
-                        {items.map((item) => (
-                            <DraggableItem key={item.id} id={item.id} label={item.label} />
-                        ))}
+                        {["big-square", "big-triangle", "small-square", "small-rectangle"].map((id) => {
+                            const isInTargets = Object.values(targets).flat().includes(id);
+                            if (!isInTargets) {
+                                return <DraggableItem key={id} id={id} className={id} />;
+                            }
+                            return null;
+                        })}
                     </div>
+
+                    {/* Ciljna polja */}
                     <div className="drag-targets">
                         <DroppableTarget id="roof" className="droppable roof">
-                            {base.roof.items.map((item) => (
-                                <DraggableItem key={item.id} id={item.id} label={item.label} />
+                            {targets.roof.map((id) => (
+                                <DraggableItem key={id} id={id} className={id} />
                             ))}
                         </DroppableTarget>
-                        {/* Onemogućavanje `base` kao droppable nakon što Veliki Kvadrat bude prebačen */}
-                        {base.isBaseEnabled ? (
-                            <DroppableTarget id="main" className="droppable base">
-                                <span>Prevuci veliki kvadrat ovde</span>
-                            </DroppableTarget>
-                        ) : (
-                            <div className="base-filled">
-                                <DroppableTarget id="big-square" className="droppable big-square">
-                                    {base.main.items.map((item) => (
-                                        <DraggableItem key={item.id} id={item.id} label={item.label} />
-                                    ))}
-                                </DroppableTarget>
-                            </div>
-                        )}
+                        <DroppableTarget id="base" className="droppable base">
+                            {targets.base.map((id) => (
+                                <DraggableItem key={id} id={id}  />
+                            ))}
+                            {targets.base.includes("big-square") && (
+                                <div className="big-square">
+                                    <DroppableTarget id="leftWindow" className="window left-window">
+                                        {targets.leftWindow.map((id) => (
+                                            <DraggableItem key={id} id={id} className={id} />
+                                        ))}
+                                    </DroppableTarget>
+                                    <DroppableTarget id="door" className="door">
+                                        {targets.door.map((id) => (
+                                            <DraggableItem key={id} id={id} className={id} />
+                                        ))}
+                                    </DroppableTarget>
+                                    <DroppableTarget id="rightWindow" className="window right-window">
+                                        {targets.rightWindow.map((id) => (
+                                            <DraggableItem key={id} id={id} className={id} />
+                                        ))}
+                                    </DroppableTarget>
+                                </div>
+                            )}
+                        </DroppableTarget>
                     </div>
                 </div>
-            </DragAndDropContext>
-            <button
-                className="submit-btn"
-                onClick={handleSubmit}
-                disabled={!base.main.hasBigSquare}
-            >
+            </DndContext>
+            <button className="submit-btn" onClick={handleNext}>
                 Dalje
             </button>
         </div>

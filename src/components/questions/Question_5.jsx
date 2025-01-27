@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
-import "../../styles/question-5.css";
 import { useScore } from "../../context/ScoreContext";
 
 function DraggableItem({ id, label }) {
