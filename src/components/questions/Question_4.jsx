@@ -5,49 +5,43 @@ import { useScore } from "../../context/ScoreContext";
 function Question4({ onNext }) {
     const { addScore } = useScore();
     const [items, setItems] = useState([
-        { id: "pismo", label: "📜 Pismo" },
-        { id: "injekcija", label: "💉 Injekcija" },
-        { id: "oklagija", label: "🍞 Oklagija" },
+        { id: "pismo", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_pismo.png" },
+        { id: "injekcija", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_injekcija.png" },
+        { id: "oklagija", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_oklagija.png" },
     ]);
 
     const [targets, setTargets] = useState([
-        { id: "postar", label: "Poštar", correct: "pismo", droppedItem: null },
-        { id: "medicinska-sestra", label: "Medicinska sestra", correct: "injekcija", droppedItem: null },
-        { id: "pekar", label: "Pekar", correct: "oklagija", droppedItem: null },
+        { id: "postar", correct: "pismo", droppedItem: null, imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_postar.png" },
+        { id: "medicinska-sestra", correct: "injekcija", droppedItem: null, imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_medicinskaSestra.png" },
+        { id: "pekar", correct: "oklagija", droppedItem: null, imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_kuvar.png" },
     ]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
 
-        if (!over) return; // Ako nema destinacije, ne radi ništa
+        if (!over) return;
 
-        const draggedItem = items.find((item) => item.id === active.id) || 
+        const draggedItem = items.find((item) => item.id === active.id) ||
                             targets.find((target) => target.droppedItem?.id === active.id)?.droppedItem;
 
         if (!draggedItem) return;
 
-        // Ažuriraj stanje izvora i ciljeva
         let updatedItems = [...items];
         let updatedTargets = [...targets];
 
-        // Ukloni predmet iz trenutne lokacije
         updatedItems = updatedItems.filter((item) => item.id !== draggedItem.id);
         updatedTargets = updatedTargets.map((target) => {
             if (target.droppedItem?.id === draggedItem.id) {
-                return { ...target, droppedItem: null }; // Ukloni predmet iz ciljanog polja
+                return { ...target, droppedItem: null };
             }
             return target;
         });
 
-        // Dodaj predmet na novu lokaciju
         if (over.id === "items") {
-            // Povratak u izvorno polje
             updatedItems.push(draggedItem);
         } else {
-            // Prebacivanje u cilj
             updatedTargets = updatedTargets.map((target) => {
                 if (target.id === over.id) {
-                    // Ako cilj već ima predmet, vrati ga u izvorno polje
                     if (target.droppedItem) {
                         updatedItems.push(target.droppedItem);
                     }
@@ -73,43 +67,36 @@ function Question4({ onNext }) {
     };
 
     return (
-        <div className="question-container">
-            <h2>Spoji predmete koje koriste ljudi na slici u svom poslu:</h2>
-            <DragAndDropContext onDragEnd={handleDragEnd}>
-                <div className="drag-container">
-                    <div className="drag-items takeFrom">
-                        {items.map((item) => (
-                            <DraggableItem key={item.id} id={item.id} label={item.label} >
-                                <div className="takeFrom">
-
-                                </div>
-                            </DraggableItem>
-                        ))}
+        <div className="question-4">
+            <div className="question-container">
+                <h2>Spoji predmete koje koriste ljudi na slici u svom poslu:</h2>
+                <DragAndDropContext onDragEnd={handleDragEnd}>
+                    <div className="drag-container">
+                        <div className="drag-items">
+                            {items.map((item) => (
+                                <DraggableItem key={item.id} id={item.id}>
+                                    <img src={item.imgSrc} alt="item" className="item-image" />
+                                </DraggableItem>
+                            ))}
+                        </div>
+                        <div className="drag-targets">
+                            {targets.map((target) => (
+                                <DroppableTarget key={target.id} id={target.id}>
+                                    <img src={target.imgSrc} alt="target" className="target-image" />
+                                    {target.droppedItem && (
+                                        <DraggableItem id={target.droppedItem.id}>
+                                            <img src={target.droppedItem.imgSrc} alt="item" className="item-image" />
+                                        </DraggableItem>
+                                    )}
+                                </DroppableTarget>
+                            ))}
+                        </div>
                     </div>
-                    <div className="drag-targets">
-                        {targets.map((target) => (
-                            <DroppableTarget
-                                key={target.id}
-                                id={target.id}
-                                label={target.label}
-                            >
-                                {target.droppedItem && (
-                                    
-                                    <DraggableItem
-                                        id={target.droppedItem.id}
-                                        label={target.droppedItem.label}
-                                    >
-                                        <div className="takeTo"></div>
-                                    </DraggableItem>
-                                )}
-                            </DroppableTarget>
-                        ))}
-                    </div>
-                </div>
-            </DragAndDropContext>
-            <button className="submit-btn" onClick={handleSubmit}>
-                Dalje
-            </button>
+                </DragAndDropContext>
+                <button className="submit-btn" onClick={handleSubmit}>
+                    Dalje
+                </button>
+            </div>
         </div>
     );
 }

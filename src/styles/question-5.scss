@@ -1,82 +1,110 @@
-.question-container {
-    text-align: center;
-    margin-top: 20px;
+.question-5 {
+    .question-container {
+        text-align: center;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sequence-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        .sequence-item {
+            font-size: 1.2rem;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            min-width: 100px;
+            text-align: center;
+            background-color: #FFF;
+            
+            img {
+                height: 150px;
+                width: 150px;
+            }
+        }
+    }
+    
+    .droppable-target {
+        height: 150px;
+        width: 150px;
+        border: 1px dashed #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    
+    .drag-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .draggable-item {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: grab;
+        transition: transform 0.2s;
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    }
+    
+    .draggable-item:active {
+        cursor: grabbing;
+    }
+    
+    .dropped-item {
+        font-size: 2rem;
+        padding: 10px;
+        border: 1px solid #28a745;
+        background-color: #e7f3e7;
+        border-radius: 5px;
+    }
+
+    .submit-btn {
+        padding: 10px 20px;
+        background-color: #3564ab;
+        color: #fff;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 60px;
+        width: fit-content;
+        margin: auto;
+
+        &:hover {
+            background-color: #28a745;
+        }
+      }
+      
+      .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+  
+    
+    
 }
 
-.sequence-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.sequence-item {
-    font-size: 1.2rem;
-    padding: 10px;
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    min-width: 100px;
-    text-align: center;
-    background-color: #f8f9fa;
-}
-
-.droppable-target {
-    min-height: 50px;
-    min-width: 100px;
-    border: 2px dashed #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-}
-
-.drag-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.draggable-item {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: grab;
-    transition: transform 0.2s;
-}
-
-.draggable-item:active {
-    cursor: grabbing;
-}
-
-.dropped-item {
-    font-size: 1.2rem;
-    padding: 10px;
-    border: 1px solid #28a745;
-    background-color: #e7f3e7;
-    border-radius: 5px;
-}
-
-.submit-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.submit-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.submit-btn:hover:not(:disabled) {
-    background-color: #0056b3;
-}

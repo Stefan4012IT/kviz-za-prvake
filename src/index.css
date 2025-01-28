@@ -79,24 +79,7 @@ code {
   font-weight: 900;
 }
 
-.submit-btn {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: #fff;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  margin-top: 60px;
-  width: fit-content;
-  margin: auto;
-}
 
-.submit-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
 
 .drag-container {
   display: flex;

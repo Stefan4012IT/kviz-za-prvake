@@ -88,59 +88,62 @@ function Question6({ onNext }) {
     };
 
     return (
-        <div className="question-container">
-            <h2>Složi kućicu:</h2>
-            <DndContext onDragEnd={handleDragEnd}>
-                <div className="drag-container">
-                    {/* Elementi za prevlačenje */}
-                    <div className="drag-items">
-                        {["big-square", "big-triangle", "small-square", "small-rectangle"].map((id) => {
-                            const isInTargets = Object.values(targets).flat().includes(id);
-                            if (!isInTargets) {
-                                return <DraggableItem key={id} id={id} className={id} />;
-                            }
-                            return null;
-                        })}
-                    </div>
+        <div className="question-6">
+            <div className="question-container">
+                <h2>Složi kućicu:</h2>
+                <DndContext onDragEnd={handleDragEnd}>
+                    <div className="drag-container">
+                        {/* Elementi za prevlačenje */}
+                        <div className="drag-items">
+                            {["big-square", "big-triangle", "small-square", "small-rectangle"].map((id) => {
+                                const isInTargets = Object.values(targets).flat().includes(id);
+                                if (!isInTargets) {
+                                    return <DraggableItem key={id} id={id} className={id} />;
+                                }
+                                return null;
+                            })}
+                        </div>
 
-                    {/* Ciljna polja */}
-                    <div className="drag-targets">
-                        <DroppableTarget id="roof" className="droppable roof">
-                            {targets.roof.map((id) => (
-                                <DraggableItem key={id} id={id} className={id} />
-                            ))}
-                        </DroppableTarget>
-                        <DroppableTarget id="base" className="droppable base">
-                            {targets.base.map((id) => (
-                                <DraggableItem key={id} id={id}  />
-                            ))}
-                            {targets.base.includes("big-square") && (
-                                <div className="big-square">
-                                    <DroppableTarget id="leftWindow" className="window left-window">
-                                        {targets.leftWindow.map((id) => (
-                                            <DraggableItem key={id} id={id} className={id} />
-                                        ))}
-                                    </DroppableTarget>
-                                    <DroppableTarget id="door" className="door">
-                                        {targets.door.map((id) => (
-                                            <DraggableItem key={id} id={id} className={id} />
-                                        ))}
-                                    </DroppableTarget>
-                                    <DroppableTarget id="rightWindow" className="window right-window">
-                                        {targets.rightWindow.map((id) => (
-                                            <DraggableItem key={id} id={id} className={id} />
-                                        ))}
-                                    </DroppableTarget>
-                                </div>
-                            )}
-                        </DroppableTarget>
+                        {/* Ciljna polja */}
+                        <div className="drag-targets">
+                            <DroppableTarget id="roof" className="droppable roof">
+                                {targets.roof.map((id) => (
+                                    <DraggableItem key={id} id={id} className={id} />
+                                ))}
+                            </DroppableTarget>
+                            <DroppableTarget id="base" className="droppable base">
+                                {targets.base.map((id) => (
+                                    <DraggableItem key={id} id={id}  />
+                                ))}
+                                {targets.base.includes("big-square") && (
+                                    <div className="big-square">
+                                        <DroppableTarget id="leftWindow" className="window left-window">
+                                            {targets.leftWindow.map((id) => (
+                                                <DraggableItem key={id} id={id} className={id} />
+                                            ))}
+                                        </DroppableTarget>
+                                        <DroppableTarget id="door" className="door">
+                                            {targets.door.map((id) => (
+                                                <DraggableItem key={id} id={id} className={id} />
+                                            ))}
+                                        </DroppableTarget>
+                                        <DroppableTarget id="rightWindow" className="window right-window">
+                                            {targets.rightWindow.map((id) => (
+                                                <DraggableItem key={id} id={id} className={id} />
+                                            ))}
+                                        </DroppableTarget>
+                                    </div>
+                                )}
+                            </DroppableTarget>
+                        </div>
                     </div>
-                </div>
-            </DndContext>
-            <button className="submit-btn" onClick={handleNext}>
-                Dalje
-            </button>
+                </DndContext>
+                <button className="submit-btn" onClick={handleNext}>
+                    Dalje
+                </button>
+            </div>
         </div>
+        
     );
 }
 

@@ -28,13 +28,13 @@ function Quiz({ userData }) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
     const questions = [
-        // { id: 1, component: Question1 },
+        { id: 1, component: Question1 },
         // { id: 2, component: Question2 },
         // { id: 3, component: Question3 },
         // { id: 4, component: Question4 },
         // { id: 5, component: Question5 },
-        { id: 6, component: Question6 },
-        // { id: 7, component: Question7 },
+        // { id: 6, component: Question6 },
+        { id: 7, component: Question7 },
         // { id: 8, component: Question8 },
         // { id: 9, component: Question9 },
         // { id: 10, component: Question10 },
@@ -65,11 +65,18 @@ function Quiz({ userData }) {
     const CurrentQuestion = questions[currentQuestionIndex].component;
 
     return (
-        <div className="quiz-container">
-            <h1>Zdravo, {userData.name} {userData.surname}!</h1>
-            <p>Osvojeni poeni: {score}</p>
-            <CurrentQuestion onNext={handleNext} />
-        </div>
+        <>
+            <div className="full-page-content">
+                <div className="profile-info">
+                    <h4>Učenik,<br></br> {userData.name} {userData.surname}!</h4>
+                    <p>Osvojeni poeni: {score}</p>
+                </div>
+            </div>
+            <div className="quiz-container">
+                <CurrentQuestion onNext={handleNext} />
+            </div>
+        </>
+        
     );
 }
 

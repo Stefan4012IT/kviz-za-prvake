@@ -1,20 +1,56 @@
-.drag-container {
-    height: 600px;
+.question-4 {
+    .drag-container {
+        display: flex;
+        flex-direction: column;
+    
+    
+        .takeFrom, .drag-targets {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        
+        }
+        
+        .takeFrom .drag-item {
+            width: 100%;
+            height: 100%;
+            img {
+                height: 250px;
+                width: 250px;
+                margin: 10px 15px;
+            }
+        }
+
+        .draggable-item {
+            img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        
+        .drag-target  {
+            width: 100%;
+            height: 100%;
+            img {
+                height: 250px;
+                width: 250px;
+                margin: 10px 15px;
+            }
+        }
+
+        .drag-item {
+
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            img {
+                width: 100px;
+                height: auto;
+                border-radius: 8px;
+                cursor: grab;
+            }
+        }
+    }
+    
 }
 
-.takeFrom, .drag-targets {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
-
-.takeFrom .drag-item {
-    width: 100%;
-    height: 200px;
-}
-
-.drag-target  {
-    width: 100%;
-    height: 200px;
-}

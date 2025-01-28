@@ -1,4 +1,4 @@
-.question-2 {
+.question-3 {
     .option-image {
         width: 100%;
         height: 100%;
@@ -39,8 +39,9 @@
       }
       
       .options {
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 15px;
         margin: 20px 0;
     
@@ -75,4 +76,3 @@
       }
       
 }
-

@@ -5,13 +5,47 @@ function Question7({ onNext }) {
     const { addScore } = useScore();
     const [showSequence, setShowSequence] = useState(true);
     const [selectedOption, setSelectedOption] = useState(null);
-    const [isAnswered, setIsAnswered] = useState(false);
 
-    const sequence = ["🐶", "🐱", "🐶", "🐶"];
+    // Niz za prikazivanje
+    const sequence = [
+        { id: 1, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+        { id: 2, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_macka.png" },
+        { id: 3, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+        { id: 4, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+    ];
+
+    // Opcije za izbor
     const options = [
-        { id: 1, value: ["🐶", "🐶", "🐱", "🐶"], label: "1 kuca, 1 kuca, 1 maca, 1 kuca" },
-        { id: 2, value: ["🐶", "🐱", "🐶", "🐶"], label: "1 kuca, 1 maca, 1 kuca, 1 kuca" },
-        { id: 3, value: ["🐱", "🐶", "🐶", "🐶"], label: "1 maca, 1 kuca, 1 kuca, 1 kuca" },
+        {
+            id: 1,
+            value: [
+                { id: 1, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+                { id: 2, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+                { id: 3, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_macka.png" },
+                { id: 4, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+            ],
+            label: "1 kuca, 1 kuca, 1 maca, 1 kuca",
+        },
+        {
+            id: 2,
+            value: [
+                { id: 1, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+                { id: 2, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_macka.png" },
+                { id: 3, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+                { id: 4, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+            ],
+            label: "1 kuca, 1 maca, 1 kuca, 1 kuca",
+        },
+        {
+            id: 3,
+            value: [
+                { id: 1, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_macka.png" },
+                { id: 2, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+                { id: 3, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+                { id: 4, imgSrc: process.env.PUBLIC_URL + "/img/question_7/kviz_pas.png" },
+            ],
+            label: "1 maca, 1 kuca, 1 kuca, 1 kuca",
+        },
     ];
 
     const correctOption = 2;
@@ -22,48 +56,57 @@ function Question7({ onNext }) {
         return () => clearTimeout(timer);
     }, []);
 
-    const handleAnswer = (id) => {
-        if (isAnswered) return;
+    const handleOptionClick = (id) => {
+        setSelectedOption(id); // Korisnik može da promeni izbor
+    };
 
-        setSelectedOption(id);
-        setIsAnswered(true);
-
-        if (id === correctOption) {
+    const handleSubmit = () => {
+        if (selectedOption === correctOption) {
             addScore(2); // Dodaj 2 boda za tačan odgovor
         }
+        onNext();
     };
 
     return (
-        <div className="question-container">
-            <h2>Pogledaj niz i zapamti ga:</h2>
-            {showSequence ? (
-                <div className="sequence">
-                    {sequence.map((item, index) => (
-                        <span key={index} className="sequence-item">
-                            {item}
-                        </span>
-                    ))}
-                </div>
-            ) : (
-                <div className="options">
-                    <h3>Koji niz je tačan?</h3>
-                    {options.map((option) => (
-                        <button
-                            key={option.id}
-                            className={`option-btn ${selectedOption === option.id ? (option.id === correctOption ? "correct" : "incorrect") : ""}`}
-                            onClick={() => handleAnswer(option.id)}
-                            disabled={isAnswered}
-                        >
-                            {option.label}
-                        </button>
-                    ))}
-                </div>
-            )}
-            {isAnswered && (
-                <button className="next-btn" onClick={onNext}>
+        <div className="question-7">
+            <div className="question-container">
+                <h2>Pogledaj niz i zapamti ga:</h2>
+                {showSequence ? (
+                    <div className="sequence">
+                        {sequence.map((item) => (
+                            <img key={item.id} src={item.imgSrc} alt={`Zivotinja ${item.id}`} className="sequence-image" />
+                        ))}
+                    </div>
+                ) : (
+                    <>
+                        <h3>Koji niz je tačan?</h3>
+                        <div className="options">
+                            {options.map((option) => (
+                                <div
+                                    key={option.id}
+                                    className={`option ${selectedOption === option.id ? "selected" : ""}`}
+                                    onClick={() => handleOptionClick(option.id)}
+                                >
+                                    {option.value.map((animal, index) => (
+                                        <img
+                                            key={index}
+                                            src={animal.imgSrc}
+                                            alt={`Option ${option.id} Animal ${index + 1}`}
+                                            className="option-image"
+                                        />
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
+                <button
+                    className="submit-btn"
+                    onClick={handleSubmit}
+                >
                     Dalje
                 </button>
-            )}
+            </div>
         </div>
     );
 }

@@ -23,27 +23,29 @@ function Question2({ onNext }) {
     };
 
     return (
-        <div className="question-container">
-            <h2>Koja životinja daje mleko?</h2>
-            <div className="options">
-                {options.map((option) => (
-                    <div
-                        key={option.value}
-                        className={`option-btn opt-btn-img ${selected === option.value ? "selected" : ""}`}
-                        onClick={() => setSelected(option.value)}
-                    >
-                        <img src={option.imgSrc} alt={option.value} className="option-image" />
-                    </div>
-                ))}
-            </div>
-            <div
-                className="submit-btn"
-                onClick={handleSubmit}
-                disabled={!selected} // Onemogućavamo dugme dok korisnik ne odabere opciju
-            >
-                Dalje
+        <div className="question-2">
+            <div className="question-container">
+                <h2>Koja životinja daje mleko?</h2>
+                <div className="options">
+                    {options.map((option) => (
+                        <div
+                            key={option.value}
+                            className={`option-btn opt-btn-img ${selected === option.value ? "selected" : ""}`}
+                            onClick={() => setSelected(option.value)}
+                        >
+                            <img src={option.imgSrc} alt={option.value} className="option-image" />
+                        </div>
+                    ))}
+                </div>
+                <div
+                    className="submit-btn"
+                    onClick={handleSubmit}
+                >
+                    Dalje
+                </div>
             </div>
         </div>
+        
     );
 }
 

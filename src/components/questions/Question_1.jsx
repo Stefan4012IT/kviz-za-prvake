@@ -14,27 +14,29 @@ function Question1({ onNext }) {
     };
 
     return (
-        <div className="question-container">
-            <h2>Koliko imaš godina?</h2>
-            <div className="options">
-                {["5", "6", "7", "8"].map((option) => (
-                    <div
-                        key={option}
-                        className={`option-btn ${selected === option ? "selected" : ""}`}
-                        onClick={() => setSelected(option)}
-                    >
-                        {option}
-                    </div>
-                ))}
-            </div>
-            <div
-                className="submit-btn"
-                onClick={handleSubmit}
-                disabled={!selected} // Onemogućavamo dugme dok korisnik ne odabere opciju
-            >
-                Dalje
+        <div className="question-1">
+            <div className="question-container">
+                <h2>Koliko imaš godina?</h2>
+                <div className="options">
+                    {["5", "6", "7", "8"].map((option) => (
+                        <div
+                            key={option}
+                            className={`option-btn ${selected === option ? "selected" : ""}`}
+                            onClick={() => setSelected(option)}
+                        >
+                            <span>{option}</span>
+                        </div>
+                    ))}
+                </div>
+                <div
+                    className="submit-btn"
+                    onClick={handleSubmit}
+                >
+                    Dalje
+                </div>
             </div>
         </div>
+        
     );
 }
 

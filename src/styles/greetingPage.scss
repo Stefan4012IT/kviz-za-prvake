@@ -5,6 +5,11 @@
     align-items: center;
     height: 100vh;
     background-color: #FFF;
+
+    h1 {
+      color: #f6b52e;
+      font-weight: 500;
+    }
   }
   
   .greeting-panel {
@@ -39,7 +44,7 @@
   .greeting-button {
     padding: 10px;
     font-size: 20px;
-    background-color: #28a745;
+    background-color: #3564ab;
     color: #fff;
     text-transform: uppercase;
     border: none;
@@ -49,5 +54,5 @@
   }
   
   .greeting-button:hover {
-    background-color: #3564ab;
+    background-color: #28a745;
   }
