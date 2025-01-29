@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { useScore } from "../../context/ScoreContext";
+import "../../styles/question-8.scss";
 
-function DraggableItem({ id, label }) {
+// Komponenta za prevlačive elemente
+function DraggableItem({ id, imgSrc }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useDraggable({ id });
 
-    const style = {
-        transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
-        transition,
-    };
-
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="draggable-item">
-            {label}
+        <div
+            ref={setNodeRef}
+            {...attributes}
+            {...listeners}
+            className="draggable-item"
+            style={{
+                transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+                transition: transition || "transform 0.2s ease",
+            }}
+        >
+            <img src={imgSrc} alt="cvijet" className="flower-image" />
         </div>
     );
 }
 
-function DroppableBox({ id, children }) {
+// Komponenta za ciljana polja gde se prebacuju elementi
+function DroppableBox({ id, droppedItem }) {
     const { setNodeRef, isOver } = useDroppable({ id });
 
-    const style = {
-        backgroundColor: isOver ? "#d4edda" : "#f8f9fa",
-    };
-
     return (
-        <div ref={setNodeRef} className="droppable-box" style={style}>
-            {children}
+        <div ref={setNodeRef} className={`droppable-box ${isOver ? "hovered" : ""}`}>
+            {droppedItem ? (
+                <img src={droppedItem.imgSrc} alt="cvijet" className="flower-image" />
+            ) : (
+                <span>?</span>
+            )}
         </div>
     );
 }
@@ -35,120 +42,104 @@ function Question8({ onNext }) {
     const { addScore } = useScore();
     const [showSequence, setShowSequence] = useState(true);
     const [userSequence, setUserSequence] = useState([null, null, null, null]);
-    const [availableOptions, setAvailableOptions] = useState([
-        { id: "item-1", label: "🌹" },
-        { id: "item-2", label: "🌼" },
-        { id: "item-3", label: "🔵" },
-        { id: "item-4", label: "🌼" },
-        { id: "item-5", label: "🌺" },
-        { id: "item-6", label: "🔵" },
-    ]);
-    const [isAnswered, setIsAnswered] = useState(false);
 
+    // Ponudjeni elementi sa tačnim ID-jevima i slikama
+    const [availableOptions, setAvailableOptions] = useState([
+        { id: "crveni-cvet", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_crveniCvet.png" },
+        { id: `plavi-cvet-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_plaviCvet.png" },
+        { id: `zuta-lala-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
+        { id: "crvena-lala", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_crvenaLala.png" },
+        { id: `zuta-lala-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
+        { id: `plavi-cvet-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_plaviCvet.png" },
+    ]);
+
+    // Početni niz koji korisnik treba da zapamti
     const correctSequence = [
-        { id: "item-1", label: "🌹" },
-        { id: "item-2", label: "🌼" },
-        { id: "item-3", label: "🔵" },
-        { id: "item-4", label: "🌼" },
+        { id: "crveni-cvet", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_crveniCvet.png" },
+        { id: "zuta-lala", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
+        { id: "plavi-cvet", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_plaviCvet.png" },
+        { id: "zuta-lala", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
     ];
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowSequence(false), 10000);
+        const timer = setTimeout(() => setShowSequence(false), 5000);
         return () => clearTimeout(timer);
     }, []);
 
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-
+    const handleDragEnd = ({ active, over }) => {
         if (!over) return;
 
-        if (over.id.startsWith("box")) {
-            // Prebacivanje elementa u polje
-            const boxIndex = parseInt(over.id.replace("box-", ""), 10);
-            const draggedItem = availableOptions.find((item) => item.id === active.id);
+        const draggedItem = availableOptions.find((item) => item.id === active.id) ||
+            userSequence.find((item) => item && item.id === active.id);
 
-            if (draggedItem) {
-                const updatedSequence = [...userSequence];
-                const updatedOptions = availableOptions.filter((item) => item.id !== active.id);
+        if (!draggedItem) return;
 
-                // Ako već postoji element u tom polju, vrati ga nazad u opcije
-                if (updatedSequence[boxIndex]) {
-                    updatedOptions.push(updatedSequence[boxIndex]);
-                }
+        const targetIndex = over.id.startsWith("box-") ? parseInt(over.id.replace("box-", ""), 10) : null;
+        const sourceIndex = userSequence.findIndex((item) => item && item.id === active.id);
 
-                updatedSequence[boxIndex] = draggedItem;
+        let updatedSequence = [...userSequence];
+        let updatedOptions = [...availableOptions];
 
-                setUserSequence(updatedSequence);
-                setAvailableOptions(updatedOptions);
+        if (targetIndex !== null) {
+            if (updatedSequence[targetIndex]) {
+                updatedOptions.push(updatedSequence[targetIndex]); // Vraćanje starog elementa u ponuđene opcije
             }
-        } else if (over.id === "options") {
-            // Vraćanje elementa nazad u opcije
-            const draggedItem = userSequence.find((item) => item && item.id === active.id);
-
-            if (draggedItem) {
-                const updatedOptions = [...availableOptions, draggedItem];
-                const updatedSequence = userSequence.map((item) =>
-                    item && item.id === active.id ? null : item
-                );
-
-                setUserSequence(updatedSequence);
-                setAvailableOptions(updatedOptions);
-            }
+            updatedSequence[targetIndex] = draggedItem;
+            updatedOptions = updatedOptions.filter((item) => item.id !== draggedItem.id);
+        } else {
+            updatedOptions.push(draggedItem);
+            updatedSequence = updatedSequence.map((item) => (item && item.id === active.id ? null : item));
         }
+
+        setUserSequence(updatedSequence);
+        setAvailableOptions(updatedOptions);
     };
 
     const handleSubmit = () => {
         let score = 0;
         for (let i = 0; i < correctSequence.length; i++) {
-            if (userSequence[i]?.label === correctSequence[i].label) {
+            if (userSequence[i] && userSequence[i].id.includes(correctSequence[i].id)) {
                 score++;
             }
         }
         addScore(score);
-        setIsAnswered(true);
+        onNext();
     };
 
     return (
-        <div className="question-container">
-            <h2>Pogledaj niz i zapamti ga:</h2>
-            {showSequence ? (
-                <div className="sequence">
-                    {correctSequence.map((item, index) => (
-                        <span key={index} className="sequence-item">
-                            {item.label}
-                        </span>
-                    ))}
-                </div>
-            ) : (
-                <div>
-                    <h3>Prevuci elemente u odgovarajuće kutije:</h3>
-                    <DndContext onDragEnd={handleDragEnd}>
-                        <div className="droppable-area">
-                            {userSequence.map((item, index) => (
-                                <DroppableBox key={index} id={`box-${index}`}>
-                                    {item && <DraggableItem id={item.id} label={item.label} />}
-                                </DroppableBox>
-                            ))}
-                        </div>
-                        <h3>Dostupni elementi:</h3>
-                        <div id="options" className="draggable-options">
-                            {availableOptions.map((item) => (
-                                <DraggableItem key={item.id} id={item.id} label={item.label} />
-                            ))}
-                        </div>
-                    </DndContext>
-                    {userSequence.every((item) => item !== null) && !isAnswered && (
-                        <button className="submit-btn" onClick={handleSubmit}>
-                            Potvrdi
-                        </button>
-                    )}
-                </div>
-            )}
-            {isAnswered && (
-                <button className="next-btn" onClick={onNext}>
-                    Dalje
-                </button>
-            )}
+        <div className="question-8">
+            <div className="question-container">
+                <h2>Pogledaj niz i zapamti ga:</h2>
+                {showSequence ? (
+                    <div className="sequence">
+                        {correctSequence.map((item, index) => (
+                            <img key={index} src={item.imgSrc} alt="cvijet" className="flower-image" />
+                        ))}
+                    </div>
+                ) : (
+                    <>
+                        <h3>Prevuci elemente u odgovarajuće kutije:</h3>
+                        <DndContext onDragEnd={handleDragEnd}>
+                            <div className="droppable-area">
+                                {userSequence.map((item, index) => (
+                                    <DroppableBox key={index} id={`box-${index}`} droppedItem={item} />
+                                ))}
+                            </div>
+                            <h3>Dostupni elementi:</h3>
+                            <div id="options" className="draggable-options">
+                                {availableOptions.map((item) => (
+                                    <DraggableItem key={item.id} id={item.id} imgSrc={item.imgSrc} />
+                                ))}
+                            </div>
+                        </DndContext>
+                        {userSequence.every((item) => item !== null) && (
+                            <button className="submit-btn" onClick={handleSubmit}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </>
+                )}
+            </div>
         </div>
     );
 }

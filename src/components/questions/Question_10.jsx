@@ -3,61 +3,55 @@ import { useScore } from "../../context/ScoreContext";
 
 function Question10({ onNext }) {
     const { addScore } = useScore();
-    const [selectedAnswers, setSelectedAnswers] = useState([]);
-    const [isAnswered, setIsAnswered] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const correctAnswers = ["Autobus", "Automobil"];
 
+    // Opcije sa slikama
     const options = [
-        { id: "airplane", label: "✈️ Avion", isCorrect: false },
-        { id: "car", label: "🚗 Auto", isCorrect: true },
-        { id: "horse", label: "🐴 Konj", isCorrect: false },
-        { id: "bulldozer", label: "🚜 Bager", isCorrect: false },
-        { id: "bus", label: "🚌 Autobus", isCorrect: true },
+        { value: "Avion", imgSrc: process.env.PUBLIC_URL + "/img/question_10/kviz_avion.png" },
+        { value: "Automobil", imgSrc: process.env.PUBLIC_URL + "/img/question_10/kviz_automobil.png" },
+        { value: "Konj", imgSrc: process.env.PUBLIC_URL + "/img/question_10/kviz_konj.png" },
+        { value: "Bager", imgSrc: process.env.PUBLIC_URL + "/img/question_10/kviz_bager.png" },
+        { value: "Autobus", imgSrc: process.env.PUBLIC_URL + "/img/question_10/kviz_autobus.png" },
     ];
 
-    const handleCheckboxChange = (id) => {
-        setSelectedAnswers((prev) =>
-            prev.includes(id) ? prev.filter((answer) => answer !== id) : [...prev, id]
-        );
+    const handleToggle = (option) => {
+        if (selected.includes(option)) {
+            setSelected(selected.filter((item) => item !== option));
+        } else {
+            setSelected([...selected, option]);
+        }
     };
 
     const handleSubmit = () => {
-        let score = 0;
-        options.forEach((option) => {
-            if (selectedAnswers.includes(option.id) && option.isCorrect) {
-                score++;
-            }
-        });
-
-        addScore(score);
-        setIsAnswered(true);
+        const isCorrect =
+            correctAnswers.every((answer) => selected.includes(answer)) &&
+            selected.length === correctAnswers.length;
+        if (isCorrect) {
+            addScore(2); // Svaka tačna opcija nosi 1 bod, ukupno 2 boda
+        }
+        onNext();
     };
 
     return (
-        <div className="question-container">
-            <h2>Označi vozila kojima se vozimo u gradu:</h2>
-            <form className="options-list">
-                {options.map((option) => (
-                    <label key={option.id} className="option">
-                        <input
-                            type="checkbox"
-                            value={option.id}
-                            onChange={() => handleCheckboxChange(option.id)}
-                            disabled={isAnswered}
-                        />
-                        {option.label}
-                    </label>
-                ))}
-            </form>
-            {!isAnswered && (
+        <div className="question-10">
+            <div className="question-container">
+                <h2>Označi vozila kojima se vozimo u gradu:</h2>
+                <div className="options">
+                    {options.map((option) => (
+                        <div
+                            key={option.value}
+                            className={`option-btn opt-btn-img ${selected.includes(option.value) ? "selected" : ""}`}
+                            onClick={() => handleToggle(option.value)}
+                        >
+                            <img src={option.imgSrc} alt={option.value} className="option-image" />
+                        </div>
+                    ))}
+                </div>
                 <button className="submit-btn" onClick={handleSubmit}>
-                    Potvrdi
-                </button>
-            )}
-            {isAnswered && (
-                <button className="next-btn" onClick={onNext}>
                     Dalje
                 </button>
-            )}
+            </div>
         </div>
     );
 }
