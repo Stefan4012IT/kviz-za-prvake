@@ -22,16 +22,37 @@
                 background-color: #f6b52e;
             }
         }
-    }
+    }       
 
-
-    
     .option {
         font-size: 1.2rem;
         display: flex;
         align-items: center;
         gap: 10px;
     }
+
+    .submit-btn {
+        padding: 10px 20px;
+        background-color: #3564ab;
+        color: #fff;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 60px;
+        width: fit-content;
+        margin: 20px auto;
+
+        &:hover {
+            background-color: #28a745;
+        }
+      }
+      
+      .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
 }
 
 

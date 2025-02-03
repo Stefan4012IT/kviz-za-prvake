@@ -37,6 +37,7 @@ function Question9({ onNext }) {
         <div className="question-9">
             <div className="question-container">
                 <h2>Označi životinje koje lete:</h2>
+                <p>Za tačan odgovor potrebno je da odaberete više pojmova</p>
                 <div className="options">
                     {options.map((option) => (
                         <div

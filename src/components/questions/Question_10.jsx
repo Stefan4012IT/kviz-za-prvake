@@ -37,6 +37,7 @@ function Question10({ onNext }) {
         <div className="question-10">
             <div className="question-container">
                 <h2>Označi vozila kojima se vozimo u gradu:</h2>
+                <p>Za tačan odgovor potrebno je da odaberete više pojmova</p>
                 <div className="options">
                     {options.map((option) => (
                         <div
@@ -48,9 +49,9 @@ function Question10({ onNext }) {
                         </div>
                     ))}
                 </div>
-                <button className="submit-btn" onClick={handleSubmit}>
+                <div className="submit-btn" onClick={handleSubmit}>
                     Dalje
-                </button>
+                </div>
             </div>
         </div>
     );
