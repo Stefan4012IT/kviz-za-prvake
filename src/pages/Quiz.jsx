@@ -38,10 +38,10 @@ function Quiz({ userData }) {
         // { id: 8, component: Question8 },
         // { id: 9, component: Question9 },
         // { id: 10, component: Question10 },
-        { id: 11, component: Question11 },
+        // { id: 11, component: Question11 },
         // { id: 12, component: Question12 },
         // { id: 13, component: Question13 },
-        // { id: 14, component: Question14 },
+        { id: 14, component: Question14 },
         // { id: 15, component: Question15 },
         // { id: 16, component: Question16 },
         // { id: 17, component: Question17 },
@@ -71,9 +71,10 @@ function Quiz({ userData }) {
                     <h4>Učenik,<br></br> {userData.name} {userData.surname}!</h4>
                     <p>Osvojeni poeni: {score}</p>
                 </div>
-            </div>
-            <div className="quiz-container">
-                <CurrentQuestion onNext={handleNext} />
+            
+                <div className="quiz-container">
+                    <CurrentQuestion onNext={handleNext} />
+                </div>
             </div>
         </>
         
