@@ -41,13 +41,12 @@ function Quiz({ userData }) {
         // { id: 11, component: Question11 },
         // { id: 12, component: Question12 },
         // { id: 13, component: Question13 },
-        { id: 14, component: Question14 },
+        // { id: 14, component: Question14 },
         // { id: 15, component: Question15 },
         // { id: 16, component: Question16 },
         // { id: 17, component: Question17 },
         // { id: 18, component: Question18 },
         // { id: 19, component: Question19 },
-        // Dodavaćemo ostala pitanja ovde
     ];
 
     const handleNext = () => {
