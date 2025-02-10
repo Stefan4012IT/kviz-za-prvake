@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/kviz-za-prvake/static/css/main.bc1395c0.css",
+    "main.js": "/kviz-za-prvake/static/js/main.8762b959.js",
+    "index.html": "/kviz-za-prvake/index.html",
+    "main.bc1395c0.css.map": "/kviz-za-prvake/static/css/main.bc1395c0.css.map",
+    "main.8762b959.js.map": "/kviz-za-prvake/static/js/main.8762b959.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bc1395c0.css",
+    "static/js/main.8762b959.js"
+  ]
+}
