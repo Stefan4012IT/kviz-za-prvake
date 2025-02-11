@@ -8,8 +8,9 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
         margin-top: 20px;
-        gap: 10px;
+        gap: 25px;
 
 
         .opt-btn-img {
@@ -19,6 +20,11 @@
             img {
                 height: 250px;
                 width: 250px;
+
+                @media (max-width: 1024px) {
+                    height: 150px;
+                    width: 150px;
+                }
             }
             &.selected {
                 background-color: #f6b52e;
@@ -48,7 +54,7 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: auto;
+        margin: 30px auto;
     
         &:hover {
             background-color: #28a745;

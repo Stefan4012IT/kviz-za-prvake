@@ -14,8 +14,7 @@ function DraggableItem({ id, imgSrc }) {
             {...listeners}
             className="draggable-item"
             style={{
-                transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
-                transition: transition || "transform 0.2s ease",
+                transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined
             }}
         >
             <img src={imgSrc} alt="cvijet" className="flower-image" />

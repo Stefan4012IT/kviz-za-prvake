@@ -14,8 +14,7 @@ function DraggableBlock({ id, imgSrc }) {
             {...listeners}
             className="draggable-item"
             style={{
-                transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
-                transition: transition || "transform 0.2s ease",
+                transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined
             }}
         >
             <img src={imgSrc} alt="kocka" className="block-image" />
@@ -126,13 +125,9 @@ function Question14({ onNext }) {
                         ))}
                     </div>
                 </DndContext>
-
-                {/* Dugme za potvrdu */}
-                {userSequence.every((item) => item !== null) && (
-                    <button className="submit-btn" onClick={handleSubmit}>
-                        Potvrdi
-                    </button>
-                )}
+            </div>
+            <div className="submit-btn" onClick={handleSubmit}>
+                Potvrdi
             </div>
         </div>
     );
