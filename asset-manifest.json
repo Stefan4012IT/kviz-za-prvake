@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/kviz-za-prvake/static/css/main.a239fe74.css",
-    "main.js": "/kviz-za-prvake/static/js/main.4bb704b1.js",
+    "main.css": "/kviz-za-prvake/static/css/main.0683b240.css",
+    "main.js": "/kviz-za-prvake/static/js/main.9504a6dc.js",
     "index.html": "/kviz-za-prvake/index.html",
-    "main.a239fe74.css.map": "/kviz-za-prvake/static/css/main.a239fe74.css.map",
-    "main.4bb704b1.js.map": "/kviz-za-prvake/static/js/main.4bb704b1.js.map"
+    "main.0683b240.css.map": "/kviz-za-prvake/static/css/main.0683b240.css.map",
+    "main.9504a6dc.js.map": "/kviz-za-prvake/static/js/main.9504a6dc.js.map"
   },
   "entrypoints": [
-    "static/css/main.a239fe74.css",
-    "static/js/main.4bb704b1.js"
+    "static/css/main.0683b240.css",
+    "static/js/main.9504a6dc.js"
   ]
 }
