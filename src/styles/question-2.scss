@@ -7,72 +7,70 @@
         text-align: center;
         margin-top: 20px;
     
-        .submit-btn {
-            padding: 10px 20px;
-            background-color: #3564ab;
-            color: #fff;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            margin-top: 60px;
-            width: fit-content;
-            margin: auto;
-    
-            &:hover {
-                background-color: #28a745;
-            }
-          }
-          
-          .submit-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-          }
-      }
-      
-      .question-container h2{
-        text-align: center;
-        margin-top: 20px;
-        font-weight: 400;
-        color: #484848;
-      }
-      
-      .options {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 20px 0;
-    
-        .opt-btn-img {
-            height: 250px;
-            width: 250px;
-            margin: 10px 15px;
+        .question-container h2{
+          text-align: center;
+          font-weight: 400;
+          color: #484848;
         }
-      }
-      
-      .option-btn {
-        padding: 20px 35px;
-        background-color: #fff;
-        border: 1px solid #484848;
-        border-radius: 10px;
-        cursor: pointer;
         
-        span {
-            font-size: 28px;
-            color: #484848;
+        .options {
+          display: flex;
+          justify-content: center;
+          gap: 25px;
+          margin: 20px 0;
+      
+          .opt-btn-img {
+              height: 250px;
+              width: 250px;
+          }
         }
+        
+        .option-btn {
+          background-color: #fff;
+          border: 1px solid #484848;
+          border-radius: 10px;
+          cursor: pointer;
+          
+          span {
+              font-size: 28px;
+              color: #484848;
+          }
+  
+          &.selected {
+              background-color: #f6b52e;
+              
+              
+              span {
+                  color: #fff;
+                  font-weight: 900;
+              }
+          }
+        }
+  
+      }
+      
+      
+      .submit-btn {
+        padding: 10px 20px;
+        background-color: #3564ab;
+        color: #fff;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 60px;
+        width: fit-content;
+        margin: 30px auto;
 
-        &.selected {
-            background-color: #f6b52e;
-            
-            
-            span {
-                color: #fff;
-                font-weight: 900;
-            }
+        &:hover {
+            background-color: #28a745;
         }
       }
       
+      .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
 }
 

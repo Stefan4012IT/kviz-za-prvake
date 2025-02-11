@@ -46,25 +46,28 @@ function Question6({ onNext }) {
     });
 
     const handleDragEnd = ({ active, over }) => {
-        if (!over) return;
-
-        const sourceId = active.id;
-        const targetId = over.id;
-
+        if (!over) return; // Ako nije prebačeno nigde, ne radi ništa
+    
+        const sourceId = active.id; // ID elementa koji se prevlači
+        const targetId = over.id; // ID ciljanog polja
+    
         setTargets((prev) => {
             const updated = { ...prev };
-
-            // Uklanjanje iz svih ciljeva
+    
+            // Uklanjamo element iz svih trenutnih polja da bismo ga smestili na novo mesto
             for (const key in updated) {
                 updated[key] = updated[key].filter((item) => item !== sourceId);
             }
-
-            // Dodavanje u novi cilj
-            if (updated[targetId]) {
+    
+            // Roof može biti u base, ali mora ostati dostupan za pomeranje nazad
+            if (sourceId === "big-triangle" && targetId === "base") {
+                updated.base.push(sourceId);
+            } else if (sourceId === "big-triangle" && targetId === "roof") {
+                updated.roof.push(sourceId);
+            } else {
                 updated[targetId].push(sourceId);
             }
-
-            console.log("Updated targets:", updated); // Log za proveru
+    
             return updated;
         });
     };
@@ -112,9 +115,16 @@ function Question6({ onNext }) {
                                 ))}
                             </DroppableTarget>
                             <DroppableTarget id="base" className="droppable base">
+
                                 {targets.base.map((id) => (
                                     <DraggableItem key={id} id={id}  />
                                 ))}
+
+                                {/* Ako je roof prebačen u base, ipak ga prikaži kao roof */}
+                                {targets.base.includes("big-triangle") && (
+                                    <DraggableItem key="big-triangle" id="big-triangle" className="roof-in-base" />
+                                )}
+
                                 {targets.base.includes("big-square") && (
                                     <div className="big-square">
                                         <DroppableTarget id="leftWindow" className="window left-window">
@@ -132,6 +142,7 @@ function Question6({ onNext }) {
                                                 <DraggableItem key={id} id={id} className={id} />
                                             ))}
                                         </DroppableTarget>
+                                        
                                     </div>
                                 )}
                             </DroppableTarget>

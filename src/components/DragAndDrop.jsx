@@ -1,5 +1,5 @@
 import React from "react";
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import { DndContext, useDraggable, useDroppable, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 
 
 // DraggableItem: Element koji može da se prevlači
@@ -41,8 +41,18 @@ export function DroppableTarget({ id, label, droppedItem, children }) {
 
 // DragAndDropContext: Kontekst za upravljanje događajima prevlačenja
 export function DragAndDropContext({ children, onDragEnd }) {
+    // Omogućavamo prevlačenje mišem i dodirom (za mobilne uređaje)
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 100,  // Prevlačenje se aktivira posle 100ms
+                tolerance: 5 // Može se pomeriti 5px pre nego što se aktivira
+            }
+        })
+    );
     return (
-        <DndContext onDragEnd={onDragEnd}>
+        <DndContext sensors={sensors} onDragEnd={onDragEnd}>
             {children}
         </DndContext>
     );

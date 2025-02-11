@@ -5,6 +5,7 @@ body {
     font-family: "Comfortaa", serif;
     font-family: "Sour Gummy", serif;
     font-weight: 400;
+    overflow: hidden;
 }
 
 
@@ -16,4 +17,8 @@ h1, h2, h3, h4, h5, h6, p, span {
 p, span {
     font-family: "Comfortaa", serif;
     font-weight: 400;
+}
+
+h2 {
+    font-size: 32px;
 }

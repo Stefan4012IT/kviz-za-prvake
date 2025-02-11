@@ -15,7 +15,8 @@
     
     .draggable-item {
         cursor: grab;
-        transition: transform 0.2s ease;
+        // transition: transform 0.2s ease;
+        touch-action: none;
     }
     
     .draggable-item:active {
@@ -26,7 +27,7 @@
         width: 200px;
         height: 200px;
         background-color: #3564ab;
-        border: 1px solid #000;
+        // border: 1px solid #000;
         display: grid;
         grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
@@ -35,6 +36,7 @@
     .big-triangle {
         width: 0;
         height: 0;
+        z-index: 100;
         border-left: 100px solid transparent;
         border-right: 100px solid transparent;
         border-bottom: 100px solid #df1e1f;
@@ -71,6 +73,16 @@
     .droppable-over {
         border-color: #007bff;
     }
+
+    .roof-in-base {
+        position: relative;
+        width: 100%; 
+        height: 80px;
+        z-index: 100;
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 100px solid #df1e1f;
+    }
     
     .base.filled {
         display: flex;
@@ -83,10 +95,12 @@
     
     .window {
         width: 50px;
-        height: 50px;
+        height: 100%;
         background-color: transparent;
-        border: 1px dashed #000;
+        // border: 1px dashed #000;
         margin: 5px;
+        display: flex;
+        align-items: end;
     
         &.right-window {
             grid-column: 3 / 4;
@@ -99,10 +113,12 @@
     
     .door {
         background-color: transparent;
-        border: 1px dashed #000;
+        // border: 1px dashed #000;
         margin: 5px;
         grid-row: 2 / 3;
         grid-column: 2 / 3;
+        display: flex;
+        align-items: end;
     }
     
     .roof {
@@ -121,7 +137,7 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: auto;
+        margin: 30px auto;
 
         &:hover {
             background-color: #28a745;

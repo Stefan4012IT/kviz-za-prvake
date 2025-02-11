@@ -1,7 +1,6 @@
 .question-5 {
     .question-container {
         text-align: center;
-        margin-top: 20px;
         display: flex;
         flex-direction: column;
     }
@@ -11,7 +10,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 25px;
         margin-bottom: 20px;
 
         .sequence-item {
@@ -33,12 +32,16 @@
     .droppable-target {
         height: 150px;
         width: 150px;
+        padding: 10px;
         border: 1px dashed #000;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        background-color: #f8f9fa;
+
+        span {
+            font-size: 32px;
+        }
 
         img {
             height: 100%;
@@ -56,13 +59,12 @@
     
     .draggable-item {
         font-size: 1.2rem;
-        padding: 10px 20px;
-        background-color: #f8f9fa;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid #000;
+        border-radius: 10px;
         cursor: grab;
-        transition: transform 0.2s;
-
+        // transition: transform 0.2s;
+        touch-action: none;
         img {
             width: 150px;
             height: 150px;
@@ -92,7 +94,7 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: auto;
+        margin: 30px auto;
 
         &:hover {
             background-color: #28a745;

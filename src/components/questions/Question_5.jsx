@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import { PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useScore } from "../../context/ScoreContext";
 import "../../styles/question-5.scss";
+
+
 
 function DraggableItem({ id, imgSrc }) {
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
@@ -13,7 +16,10 @@ function DraggableItem({ id, imgSrc }) {
             {...attributes}
             className={`draggable-item ${isDragging ? "dragging" : ""}`}
             style={{
-                transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+                transform: transform
+                    ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+                    : undefined,
+                opacity: isDragging ? 0.5 : 1,
             }}
         >
             <img src={imgSrc} alt="Draggable Item" className="item-image" />
@@ -25,12 +31,11 @@ function DroppableTarget({ id, droppedItem }) {
     const { setNodeRef, isOver } = useDroppable({ id });
 
     const style = {
-        backgroundColor: isOver ? "#d4edda" : "#f8f9fa",
-        border: isOver ? "2px solid #28a745" : "2px dashed #ccc",
+        border: isOver ? "1px solid #000" : "2px dashed #000",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: "8px",
+        borderRadius: "10px",
     };
 
     return (
@@ -95,9 +100,19 @@ function Question5({ onNext }) {
         onNext();
     };
 
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 100,  // Prevlačenje se aktivira posle 100ms
+                tolerance: 5 // Može se pomeriti 5px pre nego što se aktivira
+            }
+        })
+    );
+
     return (
         <div className="question-5">
-            <DndContext onDragEnd={handleDragEnd}>
+            <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
                 <div className="question-container">
                     <h2>Nastavi niz:</h2>
                     <div className="sequence-container">
@@ -113,9 +128,9 @@ function Question5({ onNext }) {
                             <DraggableItem key={option.id} id={option.id} imgSrc={option.imgSrc} />
                         ))}
                     </div>
-                    <button className="submit-btn" onClick={handleSubmit}>
+                    <div className="submit-btn" onClick={handleSubmit}>
                         Dalje
-                    </button>
+                    </div>
                 </div>
             </DndContext>
         </div>

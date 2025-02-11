@@ -46,12 +46,13 @@ function Question3({ onNext }) {
                         </div>
                     ))}
                 </div>
-                <button
-                    className="submit-btn"
-                    onClick={handleSubmit}
-                >
-                    Dalje
-                </button>
+                
+            </div>
+            <div
+                className="submit-btn"
+                onClick={handleSubmit}
+            >
+                Dalje
             </div>
         </div>
     );

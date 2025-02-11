@@ -1,35 +1,12 @@
 .question-1 {
     .question-container {
         text-align: center;
-        margin-top: 20px;
     
-        .submit-btn {
-            padding: 10px 20px;
-            background-color: #3564ab;
-            color: #fff;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            margin-top: 60px;
-            width: fit-content;
-            margin: auto;
-    
-            &:hover {
-                background-color: #28a745;
-            }
-          }
-          
-          .submit-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-          }
+
       }
       
       .question-container h2{
         text-align: center;
-        margin-top: 20px;
         font-weight: 400;
         color: #484848;
       }
@@ -37,12 +14,12 @@
       .options {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 25px;
         margin: 20px 0;
       }
       
       .option-btn {
-        padding: 20px 35px;
+        padding: 40px 55px;
         background-color: #fff;
         border: 1px solid #484848;
         border-radius: 10px;
@@ -62,6 +39,29 @@
                 font-weight: 900;
             }
         }
+      }
+
+      .submit-btn {
+        padding: 10px 20px;
+        background-color: #3564ab;
+        color: #fff;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 60px;
+        width: fit-content;
+        margin: 30px auto;
+
+        &:hover {
+            background-color: #28a745;
+        }
+      }
+      
+      .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
       }
       
 }

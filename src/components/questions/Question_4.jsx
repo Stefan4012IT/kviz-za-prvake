@@ -5,9 +5,11 @@ import { useScore } from "../../context/ScoreContext";
 function Question4({ onNext }) {
     const { addScore } = useScore();
     const [items, setItems] = useState([
-        { id: "pismo", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_pismo.png" },
-        { id: "injekcija", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_injekcija.png" },
         { id: "oklagija", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_oklagija.png" },
+        { id: "injekcija", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_injekcija.png" },
+        { id: "pismo", imgSrc: process.env.PUBLIC_URL + "/img/question_4/kviz_pismo.png" },
+        
+        
     ]);
 
     const [targets, setTargets] = useState([
@@ -93,9 +95,9 @@ function Question4({ onNext }) {
                         </div>
                     </div>
                 </DragAndDropContext>
-                <button className="submit-btn" onClick={handleSubmit}>
-                    Dalje
-                </button>
+            </div>
+            <div className="submit-btn" onClick={handleSubmit}>
+                Dalje
             </div>
         </div>
     );
