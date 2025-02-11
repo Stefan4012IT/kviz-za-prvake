@@ -66,9 +66,9 @@ function Question15({ onNext }) {
                     ))}
                 </div>
 
-                <button className="submit-btn" onClick={handleNextTask} disabled={selectedAnswer === null}>
+                <div className="submit-btn" onClick={handleNextTask} disabled={selectedAnswer === null}>
                     {currentTaskIndex < tasks.length - 1 ? "Sledeće" : "Dalje"}
-                </button>
+                </div>
             </div>
         </div>
         

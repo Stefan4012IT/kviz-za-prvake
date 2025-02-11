@@ -2,6 +2,10 @@
     .question-container {
         text-align: center;
         margin-top: 20px;
+
+        h2 {
+            margin: 20px 50px;
+        }
     }
 
     .options-container {
@@ -39,7 +43,7 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: auto;
+        margin: 30px auto;
     
         &:hover {
             background-color: #28a745;

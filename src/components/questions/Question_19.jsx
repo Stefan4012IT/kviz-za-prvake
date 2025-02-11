@@ -48,12 +48,12 @@ function Question19({ onNext }) {
     ];
 
     const optionsTask2 = [
-        { id: "mrav", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mrav2.png" },
+        { id: "noj", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_noj.png" },
         { id: "mis", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mis2.png" },
         { id: "lisica", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_lisica.png" },
-        { id: "pas", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_pas3.png" },
-        { id: "noj", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_noj.png" },
         { id: "slon", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_slon.png" },
+        { id: "pas", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_pas3.png" },
+        { id: "mrav", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mrav2.png" },
     ];
 
     const handleNextStep = () => {
@@ -70,6 +70,7 @@ function Question19({ onNext }) {
             addScore(1);
         }
         setIsAnswered(true);
+        handleNextStep();
     };
 
     const handleDragEnd = ({ active, over }) => {
@@ -111,15 +112,9 @@ function Question19({ onNext }) {
                                 </div>
                             ))}
                         </div>
-                        {!isAnswered ? (
-                            <button className="submit-btn" onClick={handleSubmitTask1} disabled={selectedAnswer === null}>
-                                Potvrdi
-                            </button>
-                        ) : (
-                            <button className="submit-btn" onClick={handleNextStep}>
-                                Sledeće
-                            </button>
-                        )}
+                        <div className="submit-btn" onClick={handleSubmitTask1} >
+                            Sledeće
+                        </div>
                     </>
                 ) : (
                     <>

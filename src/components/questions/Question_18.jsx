@@ -44,7 +44,6 @@ function Question18({ onNext }) {
                             {options.map((option) => (
                                 <div key={option.id} className={`option ${selectedAnswer === option.id ? "selected" : ""}`} onClick={() => handleOptionSelect(option.id)}>
                                     <img src={option.imgSrc} alt={option.label} className="option-image" />
-                                    <p>{option.label}</p>
                                 </div>
                             ))}
                         </div>
@@ -54,6 +53,7 @@ function Question18({ onNext }) {
                     </>
                 )}
             </div>
+
         </div>
         
     );

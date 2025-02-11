@@ -60,7 +60,6 @@ function Question16({ onNext }) {
                             {tasks[step - 1].options.map((option) => (
                                 <div key={option.id} className={`option ${selectedAnswer === option.id ? "selected" : ""}`} onClick={() => setSelectedAnswer(option.id)}>
                                     <img src={option.imgSrc} alt={option.label} className="option-image" />
-                                    <p>{option.label}</p>
                                 </div>
                             ))}
                         </div>

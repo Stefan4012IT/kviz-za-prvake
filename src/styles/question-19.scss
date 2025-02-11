@@ -2,6 +2,10 @@
     .question-container {
         text-align: center;
         margin-top: 20px;
+
+        h2 {
+            margin: 20px 50px;
+        }
     }
 
     .options-container {
@@ -33,7 +37,27 @@
     .available-animals {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
 
+        @media (max-width: 1024px) {
+            flex-wrap: wrap;
+            max-width: 70%;
+            margin: 0 auto;
+        }
+
+        .draggable-item {
+            touch-action: none;
+            @media (max-width: 1024px) {
+                flex: 1 1 20%;
+            }
+        }
+
+        .animal-image {
+            border: 1px solid #000;
+            border-radius: 10px;
+        }
 
         img {
             width: 150px;
@@ -47,7 +71,12 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 10px;
+        gap: 25px;
+
+        @media (max-width: 1024px) {
+            margin-top: 30px;
+            justify-content: center;
+        }
         .droppable-box {
             width: 80px;
             height: 80px;
@@ -72,7 +101,7 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: auto;
+        margin: 30px auto;
     
         &:hover {
             background-color: #28a745;
