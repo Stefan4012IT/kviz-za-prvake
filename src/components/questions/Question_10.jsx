@@ -24,11 +24,17 @@ function Question10({ onNext }) {
     };
 
     const handleSubmit = () => {
-        const isCorrect =
-            correctAnswers.every((answer) => selected.includes(answer)) &&
-            selected.length === correctAnswers.length;
-        if (isCorrect) {
-            addScore(2); // Svaka tačna opcija nosi 1 bod, ukupno 2 boda
+        let scoreToAdd = 0;
+
+        // Prolazimo kroz svaki selektovani odgovor i proveravamo da li je tačan
+        selected.forEach((answer) => {
+            if (correctAnswers.includes(answer)) {
+                scoreToAdd++; // Dodajemo bod za svaki tačan odgovor
+            }
+        });
+    
+        if (scoreToAdd > 0) {
+            addScore(scoreToAdd); // Dodajemo bodove u globalni skor
         }
         onNext();
     };
@@ -49,9 +55,9 @@ function Question10({ onNext }) {
                         </div>
                     ))}
                 </div>
-                <div className="submit-btn" onClick={handleSubmit}>
-                    Dalje
-                </div>
+            </div>
+            <div className="submit-btn" onClick={handleSubmit}>
+                Dalje
             </div>
         </div>
     );

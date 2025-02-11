@@ -9,6 +9,11 @@
         flex-direction: row;
         justify-content: space-between;
         width: 800px;
+        gap: 25px;
+
+        @media (max-width: 1024px) {
+            width: 100%;
+        }
 
         img {
             width: 150px;
@@ -42,7 +47,7 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: 20px auto;
+        margin: 30px auto;
 
         &:hover {
             background-color: #28a745;

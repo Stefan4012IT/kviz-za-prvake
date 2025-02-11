@@ -62,7 +62,7 @@ function Question8({ onNext }) {
     ];
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowSequence(false), 5000);
+        const timer = setTimeout(() => setShowSequence(false), 500);
         return () => clearTimeout(timer);
     }, []);
 
@@ -132,13 +132,13 @@ function Question8({ onNext }) {
                                 ))}
                             </div>
                         </DndContext>
-                        {userSequence.every((item) => item !== null) && (
-                            <button className="submit-btn" onClick={handleSubmit}>
-                                Potvrdi
-                            </button>
-                        )}
+                        
+                        
                     </>
                 )}
+            </div>
+            <div className={`${showSequence ? "display-none" : ""} submit-btn`} onClick={handleSubmit}>
+                Potvrdi
             </div>
         </div>
     );

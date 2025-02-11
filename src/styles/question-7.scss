@@ -1,6 +1,7 @@
 .question-7 {
     .sequence {
         width: 100%;
+
         img {
             width: 100px;
             height: 100px;
@@ -8,18 +9,25 @@
     }
 
     .options {
-
+        
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
         justify-content: center;
+        @media (max-width: 1024px) {
+            flex-direction: column;
+        }
+
 
         .option {
             border: 1px solid #000;
             border-radius: 10px;
             flex: 1 1 45%; /* Svaki element zauzima 45% širine */
             max-width: 33%;
-
+            @media (max-width: 1024px) {
+                max-width: 100%;
+                flex-direction: row;
+            }
             &.selected {
                 background-color: #f6b52e;
             }
@@ -46,7 +54,11 @@
         cursor: pointer;
         margin-top: 60px;
         width: fit-content;
-        margin: 20px auto;
+        margin: 30px auto;
+
+        &.display-none {
+            display: none;
+        }
 
         &:hover {
             background-color: #28a745;

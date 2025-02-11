@@ -52,7 +52,7 @@ function Question7({ onNext }) {
 
     useEffect(() => {
         // Prikaži niz na 10 sekundi, zatim sakrij
-        const timer = setTimeout(() => setShowSequence(false), 10000);
+        const timer = setTimeout(() => setShowSequence(false), 1000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -79,33 +79,33 @@ function Question7({ onNext }) {
                     </div>
                 ) : (
                     <>
-                        <h3>Koji niz je tačan?</h3>
-                        <div className="options">
-                            {options.map((option) => (
-                                <div
-                                    key={option.id}
-                                    className={`option ${selectedOption === option.id ? "selected" : ""}`}
-                                    onClick={() => handleOptionClick(option.id)}
-                                >
-                                    {option.value.map((animal, index) => (
-                                        <img
-                                            key={index}
-                                            src={animal.imgSrc}
-                                            alt={`Option ${option.id} Animal ${index + 1}`}
-                                            className="option-image"
-                                        />
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
+                    <h3>Koji niz je tačan?</h3>
+                    <div className="options">
+                        {options.map((option) => (
+                            <div
+                                key={option.id}
+                                className={`option ${selectedOption === option.id ? "selected" : ""}`}
+                                onClick={() => handleOptionClick(option.id)}
+                            >
+                                {option.value.map((animal, index) => (
+                                    <img
+                                        key={index}
+                                        src={animal.imgSrc}
+                                        alt={`Option ${option.id} Animal ${index + 1}`}
+                                        className="option-image"
+                                    />
+                                ))}
+                            </div>
+                        ))}
+                    </div>
                     </>
                 )}
-                <button
-                    className="submit-btn"
-                    onClick={handleSubmit}
-                >
-                    Dalje
-                </button>
+            </div>
+            <div
+                className={`${showSequence ? "display-none" : ""} submit-btn`}
+                onClick={handleSubmit}
+            >
+                Dalje
             </div>
         </div>
     );
