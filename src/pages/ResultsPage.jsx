@@ -28,11 +28,11 @@ const submitToGoogleSheets = async (name, surname, score) => {
 function ResultsPage({ userData }) {
     const { score } = useScore();
 
-    useEffect(() => {
-        if (userData?.name && userData?.surname) {
-            submitToGoogleSheets(userData.name, userData.surname, score);
-        }
-    }, [userData, score]);  
+    // useEffect(() => {
+    //     if (userData?.name && userData?.surname) {
+    //         submitToGoogleSheets(userData.name, userData.surname, score);
+    //     }
+    // }, [userData, score]);  
 
     return (
         <div className="results-page">

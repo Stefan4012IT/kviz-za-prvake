@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useScore } from "../../context/ScoreContext";
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import { DndContext, useDraggable, useDroppable, useSensors, useSensor, PointerSensor, TouchSensor } from "@dnd-kit/core";
 
-// Komponenta za prevlačive elemente (životinje)
+// Komponenta za prevlačive elemente
 function DraggableItem({ id, imgSrc }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
 
@@ -21,13 +21,18 @@ function DraggableItem({ id, imgSrc }) {
     );
 }
 
-// Komponenta za ciljana polja gde se prevučene životinje ređaju
+// Komponenta za ciljana polja
 function DroppableBox({ id, droppedItem }) {
-    const { setNodeRef } = useDroppable({ id });
-
+    const { setNodeRef, isOver } = useDroppable({ id });
+    
     return (
-        <div ref={setNodeRef} className="droppable-box">
-            {droppedItem && <img src={droppedItem.imgSrc} alt="animal" className="animal-image" />}
+        <div ref={setNodeRef} className={`droppable-box ${isOver ? "hovered" : ""}`}>
+            {droppedItem ? (
+                <DraggableItem key={droppedItem.id} id={droppedItem.id} imgSrc={droppedItem.imgSrc} /> 
+                
+            ) : (
+                <span>?</span>
+            )}
         </div>
     );
 }
@@ -36,25 +41,27 @@ function Question19({ onNext }) {
     const { addScore } = useScore();
     const [step, setStep] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [isAnswered, setIsAnswered] = useState(false);
-    const [orderedAnimals, setOrderedAnimals] = useState([]);
+    const [orderedAnimals, setOrderedAnimals] = useState([null, null, null, null, null, null]);
 
+    // Tačan redosled životinja
     const correctOrder = ["mrav", "mis", "lisica", "pas", "noj", "slon"];
 
+    // Opcije za prvi task (skače)
     const optionsTask1 = [
         { id: "pas", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_1/kviz_pas2.png", isCorrect: false },
         { id: "pingvin", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_1/kviz_pingvin2.png", isCorrect: false },
         { id: "zeka", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_1/kviz_zeka.png", isCorrect: true },
     ];
 
-    const optionsTask2 = [
+    // Opcije za drugi task (redosled)
+    const [availableOptions, setAvailableOptions] = useState([
         { id: "noj", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_noj.png" },
         { id: "mis", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mis2.png" },
         { id: "lisica", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_lisica.png" },
         { id: "slon", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_slon.png" },
-        { id: "pas", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_pas3.png" },
+        { id: "pas1", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_pas3.png" },
         { id: "mrav", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mrav2.png" },
-    ];
+    ]);
 
     const handleNextStep = () => {
         setStep(step + 1);
@@ -69,30 +76,67 @@ function Question19({ onNext }) {
         if (selectedOption && selectedOption.isCorrect) {
             addScore(1);
         }
-        setIsAnswered(true);
         handleNextStep();
     };
 
     const handleDragEnd = ({ active, over }) => {
         if (!over) return;
-
-        const draggedItem = optionsTask2.find((item) => item.id === active.id);
+    
+        const draggedItem = availableOptions.find(item => item.id === active.id) ||
+                            orderedAnimals.find(item => item && item.id === active.id);
+    
         if (!draggedItem) return;
-
+    
+        const targetIndex = over.id.startsWith("box-") ? parseInt(over.id.replace("box-", ""), 10) : null;
+        const sourceIndex = orderedAnimals.findIndex(item => item && item.id === active.id);
+    
         let updatedSequence = [...orderedAnimals];
-        updatedSequence = updatedSequence.filter((item) => item.id !== draggedItem.id);
-        updatedSequence.push(draggedItem);
-
-        setOrderedAnimals(updatedSequence);
+        let updatedOptions = [...availableOptions];
+    
+        if (targetIndex !== null) {
+            if (updatedSequence[targetIndex]) {
+                // Umesto zamene direktno, pomeramo element na sledeće slobodno mesto ako postoji
+                const replacedItem = updatedSequence[targetIndex];
+                updatedOptions.push(replacedItem);
+            }
+    
+            updatedOptions = updatedOptions.filter(item => item.id !== draggedItem.id);
+    
+            // Ako se premešta iz drop zone u drop zone, vršimo zamenu
+            if (sourceIndex !== -1) {
+                updatedSequence[sourceIndex] = null;
+            }
+    
+            updatedSequence[targetIndex] = draggedItem;
+        } else {
+            // Ako vraćamo element nazad u availableOptions
+            updatedOptions.push(draggedItem);
+            if (sourceIndex !== -1) updatedSequence[sourceIndex] = null;
+        }
+    
+        // PROBAJ OVO: Održavanje praznih slotova u responsive prikazu
+        setOrderedAnimals([...updatedSequence.filter(item => item !== undefined)]);
+        setAvailableOptions([...updatedOptions]);
+        console.log("FINAL ORDERED ANIMALS:", updatedSequence);
+        console.log("FINAL AVAILABLE OPTIONS:", updatedOptions);
     };
+    
+    
+    
+    
+    
+    
+    
 
     const handleSubmitTask2 = () => {
-        const isCorrect = JSON.stringify(orderedAnimals.map((item) => item.id)) === JSON.stringify(correctOrder);
-        if (isCorrect) {
-            addScore(1);
-        }
+        addScore(1);
         onNext();
     };
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 0 } }) 
+    );
 
     return (
         <div className="question_19">
@@ -112,33 +156,33 @@ function Question19({ onNext }) {
                                 </div>
                             ))}
                         </div>
-                        <div className="submit-btn" onClick={handleSubmitTask1} >
+                        <div className="submit-btn" onClick={handleSubmitTask1}>
                             Sledeće
                         </div>
                     </>
                 ) : (
                     <>
-                        <h2>Poređaj životinje od najmanje do najveće:</h2>
-                        <DndContext onDragEnd={handleDragEnd}>
-                            <div className="available-animals">
-                                {optionsTask2.map((animal) => (
-                                    <DraggableItem key={animal.id} id={animal.id} imgSrc={animal.imgSrc} />
+                        <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+                            <h3>Dostupni elementi:</h3>
+                            <div className="draggable-options">
+                                {availableOptions.map((item) => (
+                                    <DraggableItem key={item.id} id={item.id} imgSrc={item.imgSrc} />
                                 ))}
                             </div>
-                            <div className="order-area">
-                                {correctOrder.map((_, index) => (
-                                    <DroppableBox key={index} id={`slot-${index}`} droppedItem={orderedAnimals[index]} />
+                            <h2>Poređaj životinje od najmanje do najveće:</h2>
+                            <div className="droppable-area">
+                                {orderedAnimals.map((item, index) => (
+                                    <DroppableBox key={index} id={`box-${index}`} droppedItem={item} />
                                 ))}
                             </div>
                         </DndContext>
-                        <button className="submit-btn" onClick={handleSubmitTask2} disabled={orderedAnimals.length !== correctOrder.length}>
+                        <button className="submit-btn" onClick={handleSubmitTask2} disabled={orderedAnimals.filter(Boolean).length !== correctOrder.length}>
                             Potvrdi
                         </button>
                     </>
                 )}
             </div>
         </div>
-        
     );
 }
 
