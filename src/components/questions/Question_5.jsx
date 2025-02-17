@@ -31,7 +31,7 @@ function DroppableTarget({ id, droppedItem }) {
     const { setNodeRef, isOver } = useDroppable({ id });
 
     const style = {
-        border: isOver ? "1px solid #000" : "2px dashed #000",
+        border: isOver ? "1px solid #fefefe" : "2px dashed #fefefe",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

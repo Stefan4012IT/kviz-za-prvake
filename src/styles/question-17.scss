@@ -3,9 +3,17 @@
         text-align: center;
         margin-top: 20px;
 
-        h2 {
-            margin: 20px 50px;
-        }
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+            width: 75%;
+            justify-self: anchor-center;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
 
     .options-container {
@@ -24,6 +32,10 @@
                     color: #fff;
                     font-weight: 900;
                 }    
+            }
+
+            &:hover {
+                cursor: pointer;
             }
             img {
                 width: 250px;

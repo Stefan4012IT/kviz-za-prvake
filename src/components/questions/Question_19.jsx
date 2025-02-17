@@ -59,7 +59,7 @@ function Question19({ onNext }) {
         { id: "mis", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mis2.png" },
         { id: "lisica", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_lisica.png" },
         { id: "slon", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_slon.png" },
-        { id: "pas1", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_pas3.png" },
+        { id: "pas", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_pas3.png" },
         { id: "mrav", imgSrc: process.env.PUBLIC_URL + "/img/question_19/task_2/kviz_mrav2.png" },
     ]);
 
@@ -71,13 +71,7 @@ function Question19({ onNext }) {
         setSelectedAnswer(optionId);
     };
 
-    const handleSubmitTask1 = () => {
-        const selectedOption = optionsTask1.find((option) => option.id === selectedAnswer);
-        if (selectedOption && selectedOption.isCorrect) {
-            addScore(1);
-        }
-        handleNextStep();
-    };
+
 
     const handleDragEnd = ({ active, over }) => {
         if (!over) return;
@@ -117,19 +111,23 @@ function Question19({ onNext }) {
         // PROBAJ OVO: Održavanje praznih slotova u responsive prikazu
         setOrderedAnimals([...updatedSequence.filter(item => item !== undefined)]);
         setAvailableOptions([...updatedOptions]);
-        console.log("FINAL ORDERED ANIMALS:", updatedSequence);
-        console.log("FINAL AVAILABLE OPTIONS:", updatedOptions);
     };
     
-    
-    
-    
-    
-    
+    const handleSubmitTask1 = () => {
+        const selectedOption = optionsTask1.find((option) => option.id === selectedAnswer);
+        if (selectedOption && selectedOption.isCorrect) {
+            addScore(1); // Ako je tačan odgovor, dodaj 1 bod
+        }
+        handleNextStep();
+    };
     
 
     const handleSubmitTask2 = () => {
-        addScore(1);
+        const isCorrect = orderedAnimals.every((item, index) => item && item.id === correctOrder[index]);
+    
+        if (isCorrect) {
+            addScore(1); // Dodaj bod samo ako je ceo niz tačan
+        }
         onNext();
     };
 
@@ -143,12 +141,11 @@ function Question19({ onNext }) {
             <div className="question-container">
                 {step === 0 ? (
                     <>
-                        <h2>Leptir leti, a ? skače.</h2>
+                        <h2>Leptir leti, a ko skače?</h2>
                         <button className="submit-btn" onClick={handleNextStep}>Sledeće</button>
                     </>
                 ) : step === 1 ? (
                     <>
-                        <h2>Leptir leti, a ? skače.</h2>
                         <div className="options-container">
                             {optionsTask1.map((option) => (
                                 <div key={option.id} className={`option ${selectedAnswer === option.id ? "selected" : ""}`} onClick={() => handleOptionSelect(option.id)}>
@@ -163,7 +160,7 @@ function Question19({ onNext }) {
                 ) : (
                     <>
                         <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-                            <h3>Dostupni elementi:</h3>
+                            <p>Dostupni elementi:</p>
                             <div className="draggable-options">
                                 {availableOptions.map((item) => (
                                     <DraggableItem key={item.id} id={item.id} imgSrc={item.imgSrc} />
@@ -176,7 +173,7 @@ function Question19({ onNext }) {
                                 ))}
                             </div>
                         </DndContext>
-                        <button className="submit-btn" onClick={handleSubmitTask2} disabled={orderedAnimals.filter(Boolean).length !== correctOrder.length}>
+                        <button className="submit-btn" onClick={handleSubmitTask2} >
                             Potvrdi
                         </button>
                     </>

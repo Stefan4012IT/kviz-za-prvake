@@ -1,11 +1,18 @@
 .question_18 {
     .question-container {
         text-align: center;
-        margin-top: 20px;
 
-        h2 {
-            margin: 20px 50px;
-        }
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+            width: 75%;
+            justify-self: anchor-center;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
 
     .options-container {

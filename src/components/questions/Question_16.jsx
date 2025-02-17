@@ -63,7 +63,7 @@ function Question16({ onNext }) {
                                 </div>
                             ))}
                         </div>
-                        <button className="submit-btn" onClick={handleNextStep} disabled={selectedAnswer === null}>
+                        <button className="submit-btn" onClick={handleNextStep} >
                             {step < 2 ? "Sledeće" : "Dalje"}
                         </button>
                     </>

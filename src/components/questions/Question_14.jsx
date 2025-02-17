@@ -25,7 +25,6 @@ function DraggableBlock({ id, imgSrc }) {
 // Komponenta za ciljana polja gde se kocke ređaju
 function DroppableBox({ id, droppedItem }) {
     const { setNodeRef, isOver } = useDroppable({ id });
-    console.log(`Droppable registered: ${id}`);
     return (
         <div ref={setNodeRef} className={`droppable-box ${isOver ? "hovered" : ""}`}>
             {droppedItem ? (
@@ -62,7 +61,6 @@ function Question14({ onNext }) {
 
     const handleDragEnd = ({ active, over }) => {
         if (!over) return;
-        console.log(`Prevlačim element sa ID: ${active.id}, target: ${over.id}`);
         const draggedItem = availableBlocks.find((item) => item.id === active.id) ||
             userSequence.find((item) => item && item.id === active.id);
 

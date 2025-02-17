@@ -3,9 +3,17 @@
         text-align: center;
         margin-top: 20px;
         overflow: hidden;
-        h2 {
-            margin: 20px 50px;
-        }
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+            width: 75%;
+            justify-self: anchor-center;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
 
     .options-container {
@@ -92,10 +100,11 @@
                 width: 100px;
                 height: 100px;
             }
-            border: 1px dashed #000;
+            border: 1px dashed #fefefe;
             border-radius: 10px;
             span {
                 font-size: 32px;
+                color: #fefefe;
             }
 
             img {
