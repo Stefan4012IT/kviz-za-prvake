@@ -1,10 +1,18 @@
 .question-6 {
 
+    h2{
+        text-align: center;
+        font-weight: 400;
+        color: #fefefe;
+      }
+
     .drag-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 20px;
+
+        
     }
     
     .drag-items {
@@ -46,18 +54,16 @@
         width: 50px;
         height: 50px;
         background-color: #f6b52e;
-        border: 1px solid #000;
     }
     
     .small-rectangle {
         width: 50px;
         height: 80px;
         background-color: #fd7e14;
-        border: 2px solid #e8590c;
     }
     
     .droppable {
-        border: 2px dashed #ccc;
+        border: 2px dashed #fefefe;
         min-height: 50px;
         min-width: 100px;
         display: flex;

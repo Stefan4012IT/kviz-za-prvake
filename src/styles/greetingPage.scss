@@ -4,10 +4,32 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #FFF;
+    background-color: transparent;
+    background: linear-gradient(352deg, rgba(52,157,70,1) 0%, rgba(52,157,70,1) 35%, rgba(49,73,153,1) 100%);
+    z-index: -2;
+
+    &::after {
+      content: "";
+      background:  url(../img/s_p_back_logo.svg) no-repeat 50% 50%;
+      background-size: cover;
+      position: absolute;
+      width: 1200px;
+      height: 714px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 1;
+      z-index: 1;
+
+      @media (max-width: 1024px) {
+        width: 100vw;
+        height: -webkit-fill-available;
+      }
+    }
 
     h1 {
-      color: #f6b52e;
+      //color: #f6b52e;
+      color: #3564ab;
       font-weight: 500;
     }
   }
@@ -16,9 +38,21 @@
     background: #fff;
     padding: 60px;
     border-radius: 30px;
-    box-shadow: 0 8px 20px 8px #efefef;
+    box-shadow: 0 8px 20px 3px #efefef;
     text-align: center;
     width: 300px;
+    z-index: 1000;
+
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 100%;
+    //   top: 0%;
+    //   left: 0%;
+    //   opacity: .1;
+    //   z-index: -1;
+    // }
   }
   
   .greeting-form {
@@ -37,7 +71,7 @@
   .greeting-input:focus-visible {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #3564ab;
+    outline: #3564ab auto 1px;
     border-radius: 5px;
   }
   

@@ -37,16 +37,16 @@ function Quiz({ userData }) {
         // { id: 7, component: Question7 },
         // { id: 8, component: Question8 },
         // { id: 9, component: Question9 },
-        // { id: 10, component: Question10 },
+        // // { id: 10, component: Question10 },
         // { id: 11, component: Question11 },
         // { id: 12, component: Question12 },
         // { id: 13, component: Question13 },
-        // { id: 14, component: Question14 },
-        // { id: 15, component: Question15 },
+        { id: 14, component: Question14 },
+        { id: 15, component: Question15 },
         // { id: 16, component: Question16 },
         // { id: 17, component: Question17 },
         // { id: 18, component: Question18 },
-        { id: 19, component: Question19 },
+        // { id: 19, component: Question19 },
     ];
 
     const handleNext = () => {
@@ -67,8 +67,8 @@ function Quiz({ userData }) {
         <>
             <div className="full-page-content">
                 <div className="profile-info">
-                    <h4>Učenik,<br></br> {userData.name} {userData.surname}!</h4>
-                    <p>Osvojeni poeni: {score}</p>
+                    <h4>😉 Učenik,<br></br> {userData.name} {userData.surname}!</h4>
+                    {/* <p>Osvojeni poeni: {score}</p> */}
                 </div>
             
                 <div className="quiz-container">

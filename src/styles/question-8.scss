@@ -2,6 +2,16 @@
     .question-container {
         text-align: center;
         margin-top: 20px;
+
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
     
     .sequence {
@@ -17,9 +27,6 @@
     
     .sequence-item {
         font-size: 2rem;
-        padding: 5px 10px;
-    
-        
     }
     
     .droppable-area {
@@ -34,14 +41,15 @@
     .droppable-box {
         width: 150px;
         height: 150px;
-        border: 2px dashed #000;
+        border: 2px dashed #fefefe;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #f8f9fa;
+        background-color: transparent;
         span {
             font-size: 32px;
+            color: #fefefe;
         }
     
         img {
@@ -52,13 +60,13 @@
     .draggable-options {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: center;
         gap: 25px;
         row-gap: 50px;
         // margin-top: 20px;
         // padding: 10px;
         border-radius: 5px;
-        width: 600px;
+        width: 100%;
         // max-width: 33%;
         // flex: 1 1 50%; /* Svaki element zauzima 45% širine */
 
@@ -72,14 +80,15 @@
     }
     
     .draggable-item {
-        width: 60px;
-        height: 60px;
+        width: 150px;
+        height: 150px;
+        
         font-size: 2rem;
         cursor: grab;
         padding: 10px;
-        border: 1px solid #000;
+        border: 1px solid #484848;
         border-radius: 10px;
-        background-color: #fff;
+        background-color: transparent;
         touch-action: none;
 
         img {
@@ -91,6 +100,7 @@
             flex: 1 1 25%;
             width: 100%;
             height: 100%;
+            max-width: fit-content;
         }
     }
     

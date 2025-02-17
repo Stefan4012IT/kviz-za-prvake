@@ -2,6 +2,16 @@
     .question-container {
         text-align: center;
         margin-top: 20px;
+
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
 
     .options {
@@ -20,8 +30,12 @@
         }
 
         .opt-btn-img {
-            border: 1px solid #000;
+            border: 1px solid #484848;
             border-radius: 10px;
+
+            &:hover {
+                cursor: pointer;
+            }
 
             &.selected {
                 background-color: #f6b52e;

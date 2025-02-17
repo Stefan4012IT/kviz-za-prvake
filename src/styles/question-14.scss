@@ -5,7 +5,13 @@
         width: 700px;
 
         h2 {
-            margin: 20px 50px;
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+        }
+
+        p {
+            color: #fefefe;
         }
     }
 
@@ -19,7 +25,16 @@
 
         .draggable-item {
             touch-action: none;
-            border: 1px solid #000;
+            border: 1px solid #484848;
+            border-radius: 10px;
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:active {
+                cursor: grab;
+            }
+
             img {
                 width: 100px;
                 height: 100px;
@@ -37,7 +52,7 @@
         .droppable-box {
             width: 80px;
             height: 80px;
-            border: 1px dashed #000;
+            border: 1px dashed #fefefe;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -45,6 +60,7 @@
 
             span {
                 font-size: 32px;
+                color: #fefefe;
             }
 
             img {

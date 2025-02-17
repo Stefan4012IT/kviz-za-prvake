@@ -52,7 +52,7 @@ function Question7({ onNext }) {
 
     useEffect(() => {
         // Prikaži niz na 10 sekundi, zatim sakrij
-        const timer = setTimeout(() => setShowSequence(false), 1000);
+        const timer = setTimeout(() => setShowSequence(false), 10000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -79,7 +79,7 @@ function Question7({ onNext }) {
                     </div>
                 ) : (
                     <>
-                    <h3>Koji niz je tačan?</h3>
+                    <p>Koji niz je tačan?</p>
                     <div className="options">
                         {options.map((option) => (
                             <div

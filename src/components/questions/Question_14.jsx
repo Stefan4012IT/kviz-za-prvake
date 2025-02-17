@@ -108,7 +108,7 @@ function Question14({ onNext }) {
                 <h2>Poređaj 6 žutih kocki i 2 crvene:</h2>
 
                 {/* Prikaz slobodnih kocki */}
-                <h3>Slobodne kocke:</h3>
+                <p>Slobodne kocke:</p>
                 <DndContext onDragEnd={handleDragEnd}>
                 <div className="available-blocks">
                     {availableBlocks.map((block) => (
@@ -117,7 +117,7 @@ function Question14({ onNext }) {
                 </div>
 
                 {/* Polja za ređanje kocki */}
-                <h3>Tvoj redosled:</h3>
+                <p>Tvoj redosled:</p>
                 
                     <div className="sequence-area">
                         {userSequence.map((item, index) => (

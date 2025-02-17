@@ -3,6 +3,16 @@
     .question-container {
         text-align: center;
         margin-top: 20px;
+
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
     
     .options-list {
@@ -13,9 +23,13 @@
         margin-top: 20px;
         gap: 25px;
 
+        @media (max-width: 1024px) {
+            flex-wrap: wrap;
+        }
+
 
         .opt-btn-img {
-            border: 1px solid #000;
+            border: 1px solid #484848;
             border-radius: 10px;
             margin: 30px 0;
             img {
@@ -23,8 +37,8 @@
                 width: 250px;
 
                 @media (max-width: 1024px) {
-                    height: 150px;
-                    width: 150px;
+                    height: 250px;
+                    width: 250px;
                 }
             }
             &.selected {

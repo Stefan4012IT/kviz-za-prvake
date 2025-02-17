@@ -1,14 +1,12 @@
 .question-1 {
     .question-container {
         text-align: center;
-    
-
       }
       
       .question-container h2{
         text-align: center;
         font-weight: 400;
-        color: #484848;
+        color: #fefefe;
       }
       
       .options {
@@ -20,14 +18,14 @@
       
       .option-btn {
         padding: 40px 55px;
-        background-color: #fff;
+        background-color: transparent;
         border: 1px solid #484848;
         border-radius: 10px;
         cursor: pointer;
         
         span {
             font-size: 28px;
-            color: #484848;
+            color: #fefefe;
         }
     
         &.selected {

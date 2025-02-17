@@ -61,7 +61,7 @@ function Question8({ onNext }) {
     ];
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowSequence(false), 500);
+        const timer = setTimeout(() => setShowSequence(false), 10000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -117,14 +117,14 @@ function Question8({ onNext }) {
                     </div>
                 ) : (
                     <>
-                        <h3>Prevuci elemente u odgovarajuće kutije:</h3>
+                        <p>Prevuci elemente u odgovarajuće kutije:</p>
                         <DndContext onDragEnd={handleDragEnd}>
                             <div className="droppable-area">
                                 {userSequence.map((item, index) => (
                                     <DroppableBox key={index} id={`box-${index}`} droppedItem={item} />
                                 ))}
                             </div>
-                            <h3>Dostupni elementi:</h3>
+                            <p>Dostupni elementi:</p>
                             <div id="options" className="draggable-options">
                                 {availableOptions.map((item) => (
                                     <DraggableItem key={item.id} id={item.id} imgSrc={item.imgSrc} />

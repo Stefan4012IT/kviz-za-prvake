@@ -1,5 +1,11 @@
 .question-4 {
     overflow: hidden;
+
+    h2{
+        text-align: center;
+        font-weight: 400;
+        color: #fefefe;
+      }
     .drag-container {
         display: flex;
         flex-direction: column;
@@ -18,7 +24,6 @@
             img {
                 height: 250px;
                 width: 250px;
-                margin: 10px 15px;
             }
         }
 
@@ -41,6 +46,7 @@
         }
 
         .drag-targets {
+            gap: 25px;
             @media (max-width: 1024px) {
                 touch-action: manipulation; // Omogućava prevlačenje dodirom
             }
@@ -48,10 +54,11 @@
             .drag-target  {
                 width: 100%;
                 height: 100%;
+                border: 1px solid #484848;
+                border-radius: 10px;
                 img {
                     height: 250px;
                     width: 250px;
-                    margin: 10px 15px;
                 }
             }
         }

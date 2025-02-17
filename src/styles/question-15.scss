@@ -3,9 +3,17 @@
         text-align: center;
         margin-top: 20px;
 
-        h2 {
-            margin: 20px 50px;
-        }
+        h2{
+            text-align: center;
+            font-weight: 400;
+            color: #fefefe;
+            width: 75%;
+            justify-self: anchor-center;
+          }
+    
+          p {
+            color: #fefefe;
+          }
     }
 
    
@@ -13,11 +21,17 @@
     .options-container {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         
         .option {
             margin: 10px 15px;
             border: 1px solid #484848;
             border-radius: 10px;
+
+            &:hover {
+                cursor: pointer;
+            }
+
             &.selected {
                 background-color: #f6b52e;
                 
