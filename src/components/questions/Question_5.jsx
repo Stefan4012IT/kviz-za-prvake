@@ -4,8 +4,6 @@ import { PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core
 import { useScore } from "../../context/ScoreContext";
 import "../../styles/question-5.scss";
 
-
-
 function DraggableItem({ id, imgSrc }) {
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
 
@@ -55,38 +53,76 @@ function DroppableTarget({ id, droppedItem }) {
 
 function Question5({ onNext }) {
     const { addScore } = useScore();
-
-    const options = [
-        {
-            id: "najveca-zvezda",
-            imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaNajveca.png",
-        },
-        {
-            id: "mala-zvezda",
-            imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMala.png",
-        },
-    ];
-
-    const sequence = [
-        {
-            id: "mala-zvezda",
-            imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMala.png",
-        },
-        {
-            id: "malo-veca-zvezda",
-            imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMaloVeca.png",
-        },
-        {
-            id: "velika-zvezda",
-            imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaVelika.png",
-        },
-    ];
-
+    const [currentTask, setCurrentTask] = useState(1);
     const [droppedItem, setDroppedItem] = useState(null);
+
+    const options = {
+        task1: [
+            {
+                id: "najveca-zvezda",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaNajveca.png",
+            },
+            {
+                id: "mala-zvezda",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMala.png",
+            },
+        ],
+        task2: [
+            {
+                id: "manji-romb",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaVelika.png", // Zameni sa rombom
+            },
+            {
+                id: "jos-manji-romb",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaNajveca.png", // Zameni sa rombom
+            },
+        ],
+    };
+
+    const sequence = {
+        task1: [
+            {
+                id: "mala-zvezda",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMala.png",
+            },
+            {
+                id: "malo-veca-zvezda",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMaloVeca.png",
+            },
+            {
+                id: "velika-zvezda",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaVelika.png",
+            },
+            {
+                id: "placeholder",
+                imgSrc: "", // Placeholder polje za drop
+            }
+        ],
+        task2: [
+            {
+                id: "najveci-romb",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaNajveca.png", // Zameni sa rombom
+            },
+            {
+                id: "veci-romb",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaVelika.png", // Zameni sa rombom
+            },
+            {
+                id: "placeholder",
+                imgSrc: "", // Placeholder polje za drop
+            },
+            {
+                id: "najmanji-romb",
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMala.png", // Zameni sa rombom
+            },
+        ],
+    };
 
     const handleDragEnd = ({ active, over }) => {
         if (over?.id === "droppable-target") {
-            const draggedOption = options.find((option) => option.id === active.id);
+            const draggedOption = options[currentTask === 1 ? "task1" : "task2"].find(
+                (option) => option.id === active.id
+            );
             if (draggedOption) {
                 setDroppedItem(draggedOption);
             }
@@ -94,19 +130,27 @@ function Question5({ onNext }) {
     };
 
     const handleSubmit = () => {
-        if (droppedItem?.id === "najveca-zvezda") {
+        if (
+            (currentTask === 1 && droppedItem?.id === "najveca-zvezda") ||
+            (currentTask === 2 && droppedItem?.id === "manji-romb")
+        ) {
             addScore(1);
         }
-        onNext();
+        if (currentTask === 1) {
+            setCurrentTask(2);
+            setDroppedItem(null);
+        } else {
+            onNext();
+        }
     };
 
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(TouchSensor, {
             activationConstraint: {
-                delay: 100,  // Prevlačenje se aktivira posle 100ms
-                tolerance: 5 // Može se pomeriti 5px pre nego što se aktivira
-            }
+                delay: 100,
+                tolerance: 5,
+            },
         })
     );
 
@@ -114,22 +158,25 @@ function Question5({ onNext }) {
         <div className="question-5">
             <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
                 <div className="question-container">
-                    <h2>Nastavi niz:</h2>
+                    <h2>{currentTask === 1 ? "Nastavi niz:" : "Poređaj rombove:"}</h2>
                     <div className="sequence-container">
-                        {sequence.map((item) => (
-                            <div key={item.id} className="sequence-item">
-                                <img src={item.imgSrc} alt="Sequence Item" className="item-image" />
+                        {sequence[currentTask === 1 ? "task1" : "task2"].map((item, index) => (
+                            <div key={index} className="sequence-item">
+                                {item.id === "placeholder" ? (
+                                    <DroppableTarget id="droppable-target" droppedItem={droppedItem} />
+                                ) : (
+                                    <img src={item.imgSrc} alt="Sequence Item" className="item-image" />
+                                )}
                             </div>
                         ))}
-                        <DroppableTarget id="droppable-target" droppedItem={droppedItem} />
                     </div>
                     <div className="drag-container">
-                        {options.map((option) => (
+                        {options[currentTask === 1 ? "task1" : "task2"].map((option) => (
                             <DraggableItem key={option.id} id={option.id} imgSrc={option.imgSrc} />
                         ))}
                     </div>
                     <div className="submit-btn" onClick={handleSubmit}>
-                        Dalje
+                        {currentTask === 1 ? "Sledeće" : "Dalje"}
                     </div>
                 </div>
             </DndContext>
