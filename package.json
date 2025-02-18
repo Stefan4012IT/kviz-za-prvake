@@ -1,6 +1,6 @@
 {
   "name": "kviz-prvaci-react",
-  "homepage": "https://stefan4012it.github.io/kviz-za-prvake",
+  "homepage": "/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "build:github": "PUBLIC_URL=https://stefan4012it.github.io/kviz-za-prvake react-scripts build",
+    "build:prod": "PUBLIC_URL=/ react-scripts build"
   },
   "eslintConfig": {
     "extends": [
