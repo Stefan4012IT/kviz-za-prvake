@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.73b57328.css",
+    "main.css": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.5415abf6.css",
     "main.js": "https://stefan4012it.github.io/kviz-za-prvake/static/js/main.31236d13.js",
     "index.html": "https://stefan4012it.github.io/kviz-za-prvake/index.html",
-    "main.73b57328.css.map": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.73b57328.css.map",
+    "main.5415abf6.css.map": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.5415abf6.css.map",
     "main.31236d13.js.map": "https://stefan4012it.github.io/kviz-za-prvake/static/js/main.31236d13.js.map"
   },
   "entrypoints": [
-    "static/css/main.73b57328.css",
+    "static/css/main.5415abf6.css",
     "static/js/main.31236d13.js"
   ]
 }
