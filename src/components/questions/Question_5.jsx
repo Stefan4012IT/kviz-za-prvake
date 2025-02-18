@@ -70,11 +70,11 @@ function Question5({ onNext }) {
         task2: [
             {
                 id: "manji-romb",
-                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaVelika.png", // Zameni sa rombom
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_rombMaloVeci.png", // Zameni sa rombom
             },
             {
                 id: "jos-manji-romb",
-                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaNajveca.png", // Zameni sa rombom
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_rombMali.png", // Zameni sa rombom
             },
         ],
     };
@@ -101,11 +101,11 @@ function Question5({ onNext }) {
         task2: [
             {
                 id: "najveci-romb",
-                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaNajveca.png", // Zameni sa rombom
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_rombNajveci.png", // Zameni sa rombom
             },
             {
                 id: "veci-romb",
-                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaVelika.png", // Zameni sa rombom
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_rombVeliki.png", // Zameni sa rombom
             },
             {
                 id: "placeholder",
@@ -113,7 +113,7 @@ function Question5({ onNext }) {
             },
             {
                 id: "najmanji-romb",
-                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_zvezdaMala.png", // Zameni sa rombom
+                imgSrc: process.env.PUBLIC_URL + "/img/question_5/kviz_rombMali.png", // Zameni sa rombom
             },
         ],
     };

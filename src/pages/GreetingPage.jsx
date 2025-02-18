@@ -11,6 +11,7 @@ function GreetingPage({ onSubmit }) {
 
     return (
         <div className="greeting-container">
+            <img className="logo" src={`${process.env.PUBLIC_URL}/img/s_p_back_logo.svg`} alt="Logo" />
             <div className="greeting-panel">
                 <h1>Pozdrav! 👋</h1>
                 <form onSubmit={handleSubmit} className="greeting-form">
