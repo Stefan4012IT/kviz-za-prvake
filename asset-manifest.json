@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.871a4bf4.css",
-    "main.js": "https://stefan4012it.github.io/kviz-za-prvake/static/js/main.1fb6df59.js",
+    "main.css": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.cf176426.css",
+    "main.js": "https://stefan4012it.github.io/kviz-za-prvake/static/js/main.91c367ac.js",
     "index.html": "https://stefan4012it.github.io/kviz-za-prvake/index.html",
-    "main.871a4bf4.css.map": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.871a4bf4.css.map",
-    "main.1fb6df59.js.map": "https://stefan4012it.github.io/kviz-za-prvake/static/js/main.1fb6df59.js.map"
+    "main.cf176426.css.map": "https://stefan4012it.github.io/kviz-za-prvake/static/css/main.cf176426.css.map",
+    "main.91c367ac.js.map": "https://stefan4012it.github.io/kviz-za-prvake/static/js/main.91c367ac.js.map"
   },
   "entrypoints": [
-    "static/css/main.871a4bf4.css",
-    "static/js/main.1fb6df59.js"
+    "static/css/main.cf176426.css",
+    "static/js/main.91c367ac.js"
   ]
 }
