@@ -68,7 +68,7 @@ function Quiz({ userData }) {
             <div className="full-page-content">
                 <div className="profile-info">
                     <h4>😉 Učenik,<br></br> {userData.name} {userData.surname}!</h4>
-                    {/* <p>Osvojeni poeni: {score}</p> */}
+                    <p>Osvojeni poeni: {score}</p>
                 </div>
             
                 <div className="quiz-container" key={currentQuestionIndex}>
