@@ -19,9 +19,12 @@
       opacity: 1;
       z-index: 1;
 
+      @media (max-width: 1400px) {
+        width: 70%;
+      }
+
       @media (max-width: 1024px) {
         width: 100vw;
-        height: -webkit-fill-available;
       }
 
       @media (max-width: 776px) {

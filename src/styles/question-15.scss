@@ -37,6 +37,10 @@
             img {
                 width: 250px;
                 height: 250px;
+                @media (max-width: 1400px) {
+                    width: 200px;
+                    height: 200px;
+                }
 
                 @media (max-width: 776px) {
                     width: 200px;

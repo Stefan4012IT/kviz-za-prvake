@@ -36,6 +36,7 @@ function ResultsPage({ userData }) {
 
     return (
         <div className="results-page">
+            <img className="logo" src={`${process.env.PUBLIC_URL}/img/s_p_back_logo.svg`} alt="Logo" />
             <h1>Hvala,<br/>što si učestvovao u kvizu!</h1>
             {/* <h2>Osvojeni poeni: {score}</h2>
             <p>Ukupan broj bodova je sabran iz svih pitanja. Nadamo se da ste uživali!</p> */}

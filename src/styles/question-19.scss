@@ -41,6 +41,11 @@
                 width: 250px;
                 height: 250px;
 
+                @media (max-width: 1400px) {
+                    width: 200px;
+                    height: 200px;
+                }
+
                 @media (max-width: 776px) {
                     width: 200px;
                     height: 200px;
@@ -98,7 +103,7 @@
         @media (max-width: 1024px) {
             justify-content: center;
         }
-        
+
         .droppable-box {
             width: 80px;
             height: 80px;

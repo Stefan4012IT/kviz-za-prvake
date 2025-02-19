@@ -6,9 +6,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .logo {
+        background-size: cover;
+        position: absolute;
+        width: 1200px;
+        height: 714px;
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        opacity: 1;
+        z-index: 1;
+  
+        @media (max-width: 1400px) {
+          width: 70%;
+          height: auto;
+        }
+  
+        @media (max-width: 1024px) {
+          width: 70%;
+          height: auto;
+        }
+  
+        @media (max-width: 776px) {
+          width: 90%;
+          height: -webkit-fill-available;
+        }
+      }
+
     h1 {
+        position: absolute;
+        top: 20%;
+        @media (max-width: 1400px) {
+            top: 10%;
+          }
         font-size: 62px;
         text-align: center;
         color: #fefefe;
+        z-index: 1000;
     }
 }

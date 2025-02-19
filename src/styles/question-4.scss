@@ -1,6 +1,11 @@
 .question-4 {
     overflow: hidden;
 
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
+
+
     h2{
         text-align: center;
         font-weight: 400;
@@ -48,6 +53,11 @@
                 width: 150px;
                 height: 150px;
 
+                @media (max-width: 1400px) {
+                    height: 80px !important;
+                    width: 80px !important;
+                  }
+
                 @media (max-width: 776px) {
                     height: 100px !important;
                     width: 100px !important;
@@ -70,9 +80,17 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                p{
+                    display: none;
+                }
                 img {
                     height: 250px;
                     width: 250px;
+
+                    @media (max-width: 1400px) {
+                        height: 150px;
+                        width: 150px;
+                      }
 
                     @media (max-width: 776px) {
                         height: 200px;

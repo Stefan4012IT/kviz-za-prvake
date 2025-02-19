@@ -40,12 +40,13 @@ p, span {
         width: 75%;
         justify-self: anchor-center;
 
-        @media (max-width: 1280px) {
+        @media (max-width: 1400px) {
+            width: 50%;
             font-size: 38px;
-            width: 90%;
         }
 
         @media (max-width: 776px) {
+            width: 90%;
             font-size: 34px;
         }
       }

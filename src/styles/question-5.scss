@@ -1,4 +1,9 @@
 .question-5 {
+    width: 100%;
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
+
     .question-container {
         text-align: center;
         display: flex;

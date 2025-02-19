@@ -61,7 +61,7 @@ function Question8({ onNext }) {
     ];
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowSequence(false), 1000);
+        const timer = setTimeout(() => setShowSequence(false), 10000);
         return () => clearTimeout(timer);
     }, []);
 
