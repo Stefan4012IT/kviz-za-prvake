@@ -1,5 +1,8 @@
 .question-3 {
-
+  width: 100%;
+  @media (max-width: 1400px) {
+      overflow-y: auto;
+    }
     .option-image {
         width: 100%;
         height: 100%;

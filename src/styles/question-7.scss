@@ -1,4 +1,8 @@
 .question-7 {
+    width: 100%;
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
     h2{
         text-align: center;
         font-weight: 400;

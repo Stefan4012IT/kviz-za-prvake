@@ -1,6 +1,10 @@
 .question_12 {
 
-    
+    width: 100%;
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
+      
     .options-list {
         display: flex;
         flex-direction: row;

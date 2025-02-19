@@ -1,5 +1,9 @@
 .question-14 {
 
+    width: 100%;
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
     .available-blocks {
         display: flex;
         flex-direction: row;

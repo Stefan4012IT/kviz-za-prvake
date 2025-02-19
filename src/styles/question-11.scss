@@ -1,4 +1,8 @@
 .question_11 {
+    width: 100%;
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
     
     .options-list {
         display: flex;

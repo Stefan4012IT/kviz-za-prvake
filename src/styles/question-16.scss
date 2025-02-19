@@ -1,4 +1,9 @@
 .question_16 {
+
+    width: 100%;
+    @media (max-width: 1400px) {
+        overflow-y: auto;
+      }
     .question-container {
 
         h2{
