@@ -19,9 +19,15 @@
         justify-content: center;
         gap: 10px;
         margin-top: 20px;
+        width: 100%;
     
         img {
             width: 200px;
+            height: 200px;
+            @media (max-width: 776px) {
+                height: 150px;
+                width: 150px;
+              }
         }
     }
     
@@ -85,7 +91,6 @@
         
         font-size: 2rem;
         cursor: grab;
-        padding: 10px;
         border: 1px solid #484848;
         border-radius: 10px;
         background-color: transparent;

@@ -1,18 +1,10 @@
 .question_18 {
     .question-container {
-        text-align: center;
 
         h2{
-            text-align: center;
-            font-weight: 400;
-            color: #fefefe;
             width: 75%;
-            justify-self: anchor-center;
           }
     
-          p {
-            color: #fefefe;
-          }
     }
 
     .options-container {
@@ -23,10 +15,12 @@
         gap: 25px;
 
         .option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid #484848;
             border-radius: 10px;
             
-
             &.selected {
                 background-color: #f6b52e;
                 
@@ -39,6 +33,11 @@
             img {
                 width: 250px;
                 height: 250px;
+
+                @media (max-width: 776px) {
+                    width: 200px;
+                    height: 200px;
+                  }
             }
         }
     }

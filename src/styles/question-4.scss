@@ -35,13 +35,23 @@
             @media (max-width: 1024px) {
                 touch-action: manipulation; // Omogućava prevlačenje dodirom
             }
+
+            @media (max-width: 776px) {
+                justify-content: space-between;
+              }
         }
 
         .draggable-item {
             touch-action: none;
+            margin: 25px 50px;
             img {
                 width: 150px;
                 height: 150px;
+
+                @media (max-width: 776px) {
+                    height: 100px !important;
+                    width: 100px !important;
+                  }
             }
         }
 
@@ -56,9 +66,18 @@
                 height: 100%;
                 border: 1px solid #484848;
                 border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 img {
                     height: 250px;
                     width: 250px;
+
+                    @media (max-width: 776px) {
+                        height: 200px;
+                        width: 200px;
+                      }
                 }
             }
         }

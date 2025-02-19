@@ -10,8 +10,8 @@ function Question13({ onNext }) {
     const options = [
         { id: "devojcica", imgSrc: process.env.PUBLIC_URL + "/img/question_13/kviz_devojcica.png", isCorrect: false },
         { id: "macka", imgSrc: process.env.PUBLIC_URL + "/img/question_13/kviz_macka.png", isCorrect: false },
-        { id: "ptica", imgSrc: process.env.PUBLIC_URL + "/img/question_13/kviz_ptica2.png", isCorrect: false },
         { id: "patike", imgSrc: process.env.PUBLIC_URL + "/img/question_13/kviz_patike.png", isCorrect: true },
+        { id: "ptica", imgSrc: process.env.PUBLIC_URL + "/img/question_13/kviz_ptica2.png", isCorrect: false },
         { id: "lutka", imgSrc: process.env.PUBLIC_URL + "/img/question_13/kviz_lutka.png", isCorrect: true },
     ];
 

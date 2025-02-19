@@ -1,18 +1,8 @@
 .question_15 {
     .question-container {
-        text-align: center;
-        margin-top: 20px;
 
         h2{
-            text-align: center;
-            font-weight: 400;
-            color: #fefefe;
             width: 75%;
-            justify-self: anchor-center;
-          }
-    
-          p {
-            color: #fefefe;
           }
     }
 
@@ -22,9 +12,12 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        gap: 25px;
         
         .option {
-            margin: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid #484848;
             border-radius: 10px;
 
@@ -44,6 +37,11 @@
             img {
                 width: 250px;
                 height: 250px;
+
+                @media (max-width: 776px) {
+                    width: 200px;
+                    height: 200px;
+                  }
             }
         }
     }

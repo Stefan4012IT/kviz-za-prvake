@@ -23,6 +23,11 @@
         width: 100vw;
         height: -webkit-fill-available;
       }
+
+      @media (max-width: 776px) {
+        width: 90%;
+        height: -webkit-fill-available;
+      }
     }
 
     h1 {

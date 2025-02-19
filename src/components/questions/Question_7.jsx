@@ -70,13 +70,17 @@ function Question7({ onNext }) {
     return (
         <div className="question-7">
             <div className="question-container">
-                <h2>Pogledaj niz i zapamti ga:</h2>
+                
                 {showSequence ? (
+                    <>
+                    <h2>Pogledaj niz i zapamti ga:</h2>
                     <div className="sequence">
                         {sequence.map((item) => (
                             <img key={item.id} src={item.imgSrc} alt={`Zivotinja ${item.id}`} className="sequence-image" />
                         ))}
                     </div>
+                    </>
+                    
                 ) : (
                     <>
                     <p>Koji niz je tačan?</p>

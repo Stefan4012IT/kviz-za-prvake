@@ -44,9 +44,9 @@ function Question8({ onNext }) {
 
     // Ponudjeni elementi sa tačnim ID-jevima i slikama
     const [availableOptions, setAvailableOptions] = useState([
-        { id: "crveni-cvet", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_crveniCvet.png" },
-        { id: `plavi-cvet-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_plaviCvet.png" },
         { id: `zuta-lala-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
+        { id: `plavi-cvet-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_plaviCvet.png" },
+        { id: "crveni-cvet", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_crveniCvet.png" },
         { id: "crvena-lala", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_crvenaLala.png" },
         { id: `zuta-lala-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
         { id: `plavi-cvet-${Math.random()}`, imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_plaviCvet.png" },
@@ -61,7 +61,7 @@ function Question8({ onNext }) {
     ];
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowSequence(false), 10000);
+        const timer = setTimeout(() => setShowSequence(false), 1000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -108,13 +108,16 @@ function Question8({ onNext }) {
     return (
         <div className="question-8">
             <div className="question-container">
-                <h2>Pogledaj niz i zapamti ga:</h2>
+                
                 {showSequence ? (
+                    <>
+                    <h2>Pogledaj niz i zapamti ga:</h2>
                     <div className="sequence">
                         {correctSequence.map((item, index) => (
                             <img key={index} src={item.imgSrc} alt="cvijet" className="flower-image" />
                         ))}
                     </div>
+                    </>
                 ) : (
                     <>
                         <p>Prevuci elemente u odgovarajuće kutije:</p>

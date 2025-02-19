@@ -18,12 +18,18 @@
         display: flex;
         flex-direction: row;
         gap: 25px;
-        justify-content: space-between;
-        width: 800px;
+        justify-content: center;
+        align-items: center;
+        
 
         @media (max-width: 1024px) {
-            width: 100%;
+            width: 70%;
         }
+
+        @media (max-width: 776px) {
+            width: 70%;
+            flex-wrap: wrap;
+          }
 
         img {
             width: 150px;
@@ -32,6 +38,7 @@
         .opt-btn-img {
             border: 1px solid #484848;
             border-radius: 10px;
+
 
             &:hover {
                 cursor: pointer;

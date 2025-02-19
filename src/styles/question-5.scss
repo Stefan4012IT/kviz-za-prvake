@@ -14,6 +14,7 @@
     }
     
     .sequence-container {
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -22,8 +23,10 @@
         margin-bottom: 20px;
 
         .sequence-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 1.2rem;
-            padding: 10px;
             border: 1px solid #484848;
             border-radius: 10px;
             min-width: 100px;
@@ -40,7 +43,6 @@
     .droppable-target {
         height: 150px;
         width: 150px;
-        padding: 10px;
         border: 1px dashed #484848;
         display: flex;
         justify-content: center;
@@ -67,12 +69,13 @@
     }
     
     .draggable-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 1.2rem;
-        padding: 10px;
         border: 1px solid #484848;
         border-radius: 10px;
         cursor: grab;
-        // transition: transform 0.2s;
         touch-action: none;
         img {
             width: 150px;

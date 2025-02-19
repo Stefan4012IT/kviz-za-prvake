@@ -10,14 +10,6 @@
         margin-top: 20px;
       }
       
-      .question-container h2{
-        text-align: center;
-        font-weight: 400;
-        color: #fefefe;
-      }
-      p {
-        color: #fefefe;
-      }
       
       .options {
         display: grid;
@@ -29,7 +21,11 @@
         .opt-btn-img {
             height: 250px;
             width: 250px;
-            margin: 10px;
+
+            @media (max-width: 776px) {
+              height: 150px;
+              width: 150px;
+            }
         }
       }
       

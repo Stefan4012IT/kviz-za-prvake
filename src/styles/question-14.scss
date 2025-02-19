@@ -1,19 +1,4 @@
 .question-14 {
-    .question-container {
-        text-align: center;
-        margin-top: 20px;
-        width: 700px;
-
-        h2 {
-            text-align: center;
-            font-weight: 400;
-            color: #fefefe;
-        }
-
-        p {
-            color: #fefefe;
-        }
-    }
 
     .available-blocks {
         display: flex;
@@ -47,9 +32,12 @@
         height: auto;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         gap: 10px;
         .droppable-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 80px;
             height: 80px;
             border: 1px dashed #fefefe;
