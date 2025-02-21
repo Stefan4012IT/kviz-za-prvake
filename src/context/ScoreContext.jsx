@@ -24,7 +24,7 @@ export function ScoreProvider({ children }) {
     useEffect(() => {
         if (checkpoints.includes(currentQuestionIndex)) {
             setScoreSegments((prevSegments) => [...prevSegments, currentSegmentScore]);
-            console.log(`📌 Sačuvan segmentirani skor: ${currentSegmentScore} na pitanju ${currentQuestionIndex}`);
+            //console.log(`📌 Sačuvan segmentirani skor: ${currentSegmentScore} na pitanju ${currentQuestionIndex}`);
             setCurrentSegmentScore(0);
         }
     }, [currentQuestionIndex]);
@@ -34,7 +34,7 @@ export function ScoreProvider({ children }) {
         if (currentQuestionIndex === totalQuestions && !isFinalSegmentSaved) {
             setScoreSegments((prevSegments) => {
                 const updatedSegments = [...prevSegments, currentSegmentScore];
-                console.log(`🏁 Sačuvan finalni segment: ${currentSegmentScore}`);
+                //console.log(`🏁 Sačuvan finalni segment: ${currentSegmentScore}`);
                 return updatedSegments;
             });
 

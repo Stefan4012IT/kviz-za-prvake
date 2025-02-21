@@ -4,7 +4,7 @@ import { useScore } from "../context/ScoreContext";
 const submitToGoogleSheets = async (name, surname, totalScore, scoreSegments) => {
     const scriptURL = "https://script.google.com/macros/s/AKfycbyQvIPNiUtOzbXm7ZqgRK8IS3Nb68awyeAlKvZMpiFf40yiTjOaqr_pYnfXUlIuZCuHaQ/exec";
 
-    console.log("📤 Šaljem podatke na Google Sheets:", name, surname, totalScore, scoreSegments);
+    //console.log("📤 Šaljem podatke na Google Sheets:", name, surname, totalScore, scoreSegments);
 
     const data = { 
         ime: name, 
@@ -25,9 +25,9 @@ const submitToGoogleSheets = async (name, surname, totalScore, scoreSegments) =>
             body: JSON.stringify(data),
         });
 
-        console.log("✅ Podaci su uspešno poslati!", data);  
+        //console.log("✅ Podaci su uspešno poslati!", data);  
     } catch (error) {
-        console.error("❌ Došlo je do greške pri slanju:", error);
+        //console.error("❌ Došlo je do greške pri slanju:", error);
     }
 };
 
@@ -36,7 +36,7 @@ function ResultsPage({ userData }) {
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        console.log("🔍 Provera segmenta u ResultsPage:", scoreSegments);
+        //console.log("🔍 Provera segmenta u ResultsPage:", scoreSegments);
 
         // Čekamo dok se svi segmenti ne sačuvaju
         if (scoreSegments.length >= 5) {
@@ -46,12 +46,12 @@ function ResultsPage({ userData }) {
 
     useEffect(() => {
         if (isReady && userData?.name && userData?.surname) {
-            console.log("📊 FINALNI PODACI PRE SLANJA:", {
-                ime: userData.name,
-                prezime: userData.surname,
-                scoreSegments: scoreSegments,
-                totalScore: totalScore
-            });
+            // console.log("📊 FINALNI PODACI PRE SLANJA:", {
+            //     ime: userData.name,
+            //     prezime: userData.surname,
+            //     scoreSegments: scoreSegments,
+            //     totalScore: totalScore
+            // });
 
             submitToGoogleSheets(userData.name, userData.surname, totalScore, scoreSegments);
         }
