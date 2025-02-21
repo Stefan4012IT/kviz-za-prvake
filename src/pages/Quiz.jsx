@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useScore } from "../context/ScoreContext";
+import ResultsPage from "./ResultsPage";
 import Question1 from "../components/questions/Question_1";
 import Question2 from "../components/questions/Question_2";
 import Question3 from "../components/questions/Question_3";
@@ -19,12 +21,8 @@ import Question17 from "../components/questions/Question_17";
 import Question18 from "../components/questions/Question_18"; 
 import Question19 from "../components/questions/Question_19"; 
 
-
-import ResultsPage from "./ResultsPage";
-import { useScore } from "../context/ScoreContext";
-
 function Quiz({ userData }) {
-    const { score } = useScore();
+    const { nextQuestion } = useScore();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
     const questions = [
@@ -50,10 +48,12 @@ function Quiz({ userData }) {
     ];
 
     const handleNext = () => {
+        nextQuestion(); // ✅ Samo povećavamo broj pitanja
+
         if (currentQuestionIndex + 1 < questions.length) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
-            setCurrentQuestionIndex(-1); // Prikazuje stranicu sa rezultatima
+            setCurrentQuestionIndex(-1);
         }
     };
 
@@ -68,15 +68,12 @@ function Quiz({ userData }) {
             <div className="full-page-content">
                 <div className="profile-info">
                     <h4>😉 Učenik,<br></br> {userData.name} {userData.surname}!</h4>
-                    {/* <p>Osvojeni poeni: {score}</p> */}
                 </div>
-            
                 <div className="quiz-container" key={currentQuestionIndex}>
                     <CurrentQuestion onNext={handleNext} />
                 </div>
             </div>
         </>
-        
     );
 }
 

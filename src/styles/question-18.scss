@@ -35,6 +35,10 @@
                     font-weight: 900;
                 }    
             }
+
+            &:hover {
+                cursor: pointer;
+            }
             img {
                 width: 250px;
                 height: 250px;

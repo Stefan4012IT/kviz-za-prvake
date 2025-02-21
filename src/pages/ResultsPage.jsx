@@ -1,38 +1,61 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { useScore } from "../context/ScoreContext";
 
-const submitToGoogleSheets = async (name, surname, score) => {
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwWI2AzpLI3t4wlgB-GoVHmkJcutqRPhAUcIezWv0vU8awmKZxKoZur6hiQzv_2hURHzg/exec";
+const submitToGoogleSheets = async (name, surname, totalScore, scoreSegments) => {
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyQvIPNiUtOzbXm7ZqgRK8IS3Nb68awyeAlKvZMpiFf40yiTjOaqr_pYnfXUlIuZCuHaQ/exec";
 
-        console.log("Šaljem podatke na Google Sheets:", name, surname, score);
+    console.log("📤 Šaljem podatke na Google Sheets:", name, surname, totalScore, scoreSegments);
 
-        const data = { ime: name, prezime: surname, skor: score };
-
-        try {
-            const response = await fetch(scriptURL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                mode: "no-cors",  
-                body: JSON.stringify(data),
-        });
-
-        console.log("Podaci su poslati! "+score);  
-        } catch (error) {
-            console.error("Došlo je do greške:", error);
-        }
+    const data = { 
+        ime: name, 
+        prezime: surname, 
+        predznanje: scoreSegments?.[0] || 0, 
+        opazanje: scoreSegments?.[1] || 0, 
+        paznja: scoreSegments?.[2] || 0, 
+        logicko: scoreSegments?.[3] || 0, 
+        govornojezicko: scoreSegments?.[4] || 0, 
+        skor: totalScore 
     };
 
+    try {
+        await fetch(scriptURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            mode: "no-cors",  
+            body: JSON.stringify(data),
+        });
 
-
+        console.log("✅ Podaci su uspešno poslati!", data);  
+    } catch (error) {
+        console.error("❌ Došlo je do greške pri slanju:", error);
+    }
+};
 
 function ResultsPage({ userData }) {
-    const { score } = useScore();
+    const { score: totalScore, scoreSegments } = useScore();
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        if (userData?.name && userData?.surname) {
-            submitToGoogleSheets(userData.name, userData.surname, score);
+        console.log("🔍 Provera segmenta u ResultsPage:", scoreSegments);
+
+        // Čekamo dok se svi segmenti ne sačuvaju
+        if (scoreSegments.length >= 5) {
+            setIsReady(true);
         }
-    }, [userData, score]);  
+    }, [scoreSegments]);
+
+    useEffect(() => {
+        if (isReady && userData?.name && userData?.surname) {
+            console.log("📊 FINALNI PODACI PRE SLANJA:", {
+                ime: userData.name,
+                prezime: userData.surname,
+                scoreSegments: scoreSegments,
+                totalScore: totalScore
+            });
+
+            submitToGoogleSheets(userData.name, userData.surname, totalScore, scoreSegments);
+        }
+    }, [isReady, userData, totalScore, scoreSegments]);
 
     return (
         <div className="results-page">

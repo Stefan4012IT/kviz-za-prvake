@@ -4,7 +4,7 @@ import { useScore } from "../../context/ScoreContext";
 function Question1({ onNext }) {
     const { addScore } = useScore(); // Pristup funkciji za dodavanje bodova
     const [selected, setSelected] = useState(null);
-    const correctAnswers = ["6", "7"];
+    const correctAnswers = ["5", "6", "7"];
 
     const handleSubmit = () => {
         if (correctAnswers.includes(selected)) {
