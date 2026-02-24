@@ -60,10 +60,14 @@ function Question8({ onNext }) {
         { id: "zuta-lala", imgSrc: process.env.PUBLIC_URL + "/img/question_8/kviz_zutaLala.png" },
     ];
 
-    useEffect(() => {
-        const timer = setTimeout(() => setShowSequence(false), 10000);
-        return () => clearTimeout(timer);
-    }, []);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => setShowSequence(false), 10000);
+    //     return () => clearTimeout(timer);
+    // }, []);
+
+    const handleNext = () => {
+        setShowSequence(false);
+    };
 
     const handleDragEnd = ({ active, over }) => {
         if (!over) return;
@@ -111,14 +115,19 @@ function Question8({ onNext }) {
                 
                 {showSequence ? (
                     <>
-                    <h2>Pogledaj niz i zapamti ga:</h2>
-                    <div className="sequence">
+                        <h2>Pogledaj niz i zapamti ga:</h2>
+
+                        <div className="sequence">
                         {correctSequence.map((item, index) => (
                             <img key={index} src={item.imgSrc} alt="cvijet" className="flower-image" />
                         ))}
-                    </div>
+                        </div>
+
+                        <button className="submit-btn" onClick={handleNext}>
+                        Dalje
+                        </button>
                     </>
-                ) : (
+                    ) : (
                     <>
                         <p>Prevuci elemente u odgovarajuće kutije:</p>
                         <DndContext onDragEnd={handleDragEnd}>

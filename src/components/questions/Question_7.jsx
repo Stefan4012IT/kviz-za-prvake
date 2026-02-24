@@ -4,6 +4,7 @@ import { useScore } from "../../context/ScoreContext";
 function Question7({ onNext }) {
     const { addScore } = useScore();
     const [showSequence, setShowSequence] = useState(true);
+    const [showAnswers, setShowAnswers] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
     // Niz za prikazivanje
@@ -50,11 +51,16 @@ function Question7({ onNext }) {
 
     const correctOption = 2;
 
-    useEffect(() => {
-        // Prikaži niz na 10 sekundi, zatim sakrij
-        const timer = setTimeout(() => setShowSequence(false), 10000);
-        return () => clearTimeout(timer);
-    }, []);
+    // useEffect(() => {
+    //     // Prikaži niz na 10 sekundi, zatim sakrij
+    //     const timer = setTimeout(() => setShowSequence(false), 10000);
+    //     return () => clearTimeout(timer);
+    // }, []);
+
+    const handleNext = () => {
+        setShowSequence(false);
+        setShowAnswers(true);
+    };
 
     const handleOptionClick = (id) => {
         setSelectedOption(id); // Korisnik može da promeni izbor
@@ -72,15 +78,24 @@ function Question7({ onNext }) {
             <div className="question-container">
                 
                 {showSequence ? (
-                    <>
+                <>
                     <h2>Pogledaj niz i zapamti ga:</h2>
+
                     <div className="sequence">
-                        {sequence.map((item) => (
-                            <img key={item.id} src={item.imgSrc} alt={`Zivotinja ${item.id}`} className="sequence-image" />
-                        ))}
+                    {sequence.map((item) => (
+                        <img
+                        key={item.id}
+                        src={item.imgSrc}
+                        alt={`Zivotinja ${item.id}`}
+                        className="sequence-image"
+                        />
+                    ))}
                     </div>
-                    </>
-                    
+
+                    <button className="submit-btn" onClick={handleNext}>
+                    Dalje
+                    </button>
+                </>
                 ) : (
                     <>
                     <p>Koji niz je tačan?</p>
